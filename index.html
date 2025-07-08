@@ -102,59 +102,25 @@
             cursor: pointer;
         }
 
-        /* --- NOVA SEÇÃO DE APRESENTAÇÃO --- */
-        #apresentacao {
-            padding-top: 140px;
-            padding-bottom: 100px;
+        /* --- SEÇÃO HERO (INÍCIO) --- */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            text-align: center;
+            background-color: var(--light-gray); /* CORREÇÃO: Cor de fundo adicionada */
         }
-
-        .presentation-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .presentation-intro {
-            flex: 1;
-            text-align: center; /* CORREÇÃO: Centraliza todo o conteúdo do bloco */
-        }
-
-        .presentation-intro h1 {
+        
+        .hero h1 {
             font-weight: 700;
             font-size: 3.5rem;
             color: var(--dark-color);
             margin-bottom: 0.5rem;
         }
 
-        .presentation-intro p {
+        .hero p {
             font-size: 1.2rem;
-            max-width: 500px;
-            margin: 0 auto 30px; /* CORREÇÃO: Centraliza o parágrafo */
-        }
-        
-        .about-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background-color: var(--white);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .about-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-        
-        .about-text p {
-            margin-bottom: 15px;
-            line-height: 1.8;
-            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
         }
 
         .cta-button {
@@ -164,7 +130,7 @@
             font-family: var(--meta-font);
             padding: 15px 30px;
             border: 2px solid var(--primary-color);
-            border-radius: 5px;
+            border-radius: 5px; /* Botão levemente arredondado */
             text-decoration: none;
             transition: all 0.3s ease;
         }
@@ -277,11 +243,12 @@
         
         .card-link { align-self: flex-start; }
         
+        /* Estilos para Embeds Responsivos */
         .embed-container {
             position: relative;
             width: 100%;
             overflow: hidden;
-            padding-top: 56.25%;
+            padding-top: 56.25%; /* Proporção 16:9 para vídeos */
             margin-bottom: 15px;
         }
         .embed-container iframe {
@@ -291,6 +258,27 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+        
+        /* --- SEÇÃO SOBRE MIM --- */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .about-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         /* --- SEÇÃO CONTATO E FOOTER --- */
@@ -327,23 +315,6 @@
         }
 
         /* --- RESPONSIVIDADE --- */
-        @media (max-width: 900px) {
-            .presentation-container {
-                flex-direction: column;
-            }
-            .presentation-intro {
-                text-align: center;
-            }
-            .about-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            .about-photo {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
         @media (max-width: 768px) {
             .nav-toggle { display: block; }
             .main-nav {
@@ -360,7 +331,8 @@
             .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
             .main-nav li { width: 100%; }
             .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
-            .presentation-intro h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-content { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -371,8 +343,9 @@
             <a href="#" class="logo">Gustavo Amaral</a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#apresentacao">Apresentação</a></li>
+                    <li><a href="#inicio">Início</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
+                    <li><a href="#sobre-mim">Sobre Mim</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
@@ -381,20 +354,11 @@
     </header>
 
     <main>
-        <section id="apresentacao" class="section">
-            <div class="container presentation-container">
-                <div class="presentation-intro">
-                    <h1>Olá, seja bem-vindo(a)! </h1>
-                    <p>Sou Gustavo Amaral, jornalista formado pela Unesp.</p>
-                    <a href="#portfolio" class="cta-button">Conheça meus trabalhos</a>
-                </div>
-                <div class="about-content">
-                    <img src="https://imgur.com/aKZVH6f.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
-                    <div class="about-text">
-                        <p>Minha trajetória profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
-                        <p>Possuo experiência com redação de pautas e criação de conteúdos para rádio, TV e redes sociais, além da produção de boletins informativos e podcasts.</p>
-                    </div>
-                </div>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1>Olá, seja bem-vindo(a)! </h1>
+                <p>Sou Gustavo Amaral, jornalista formado pela Unesp.</p>
+                <a href="#portfolio" class="cta-button">Conheça meus trabalhos</a>
             </div>
         </section>
 
@@ -412,7 +376,7 @@
                 </div>
                 
                 <div id="tcc-description" class="tcc-intro" style="display: none;">
-                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>
+                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p> 
                     <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
                 </div>
 
@@ -532,7 +496,7 @@
                             <h3 class="card-title">Vereador Coronel Meira</h3>
                         </div>
                     </div>
-
+                    
                     <!-- TCC -->
                     <div class="project-card" data-category="tcc">
                         <div class="card-content">
@@ -565,6 +529,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="sobre-mim" class="section">
+            <div class="container">
+                 <h2 class="section-title">Sobre Mim</h2>
+                 <div class="about-content">
+                     <img src="https://imgur.com/aKZVH6f.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
+                     <div class="about-text">
+                         <p>Minha experiência profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
+                         <p>Possuo experiência com redação de pautas e criação de conteúdos para rádio, TV e redes sociais, além da produção de boletins informativos e podcasts.</p>
+                     </div>
+                 </div>
             </div>
         </section>
 
