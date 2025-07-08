@@ -180,6 +180,15 @@
             color: var(--white);
             border-color: var(--primary-color);
         }
+        
+        .tcc-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 20px;
+            background-color: #f0f2e6; /* Verde bem claro */
+            border-left: 5px solid var(--primary-color);
+        }
 
         .portfolio-grid {
             display: grid;
@@ -277,7 +286,7 @@
         .contact-info-grid {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
@@ -358,7 +367,7 @@
                  <div class="about-content">
                      <img src="https://imgur.com/aKZVH6f.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
                      <div class="about-text">
-                         <p>Minha experiência profissional inclui uma atuação (enquanto estagiário) na equipe de jornalistas da Câmara Municipal de Bauru e (efetivado) no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo, a Jornal Jr., e assessor de mídias da Assessoria de Comunicação da FAAC.</p>
+                         <p>Minha experiência profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e assessor de mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
                          <p>Em geral, possuo experiência com redação de pautas e criação de conteúdos para rádio, TV e redes sociais, além da produção de boletins informativos e podcasts.</p>
                      </div>
                  </div>
@@ -376,6 +385,10 @@
                     <button class="filter-btn" data-filter="radio">Rádio</button>
                     <button class="filter-btn" data-filter="boletins">Boletins</button>
                     <button class="filter-btn" data-filter="tcc">TCC</button>
+                </div>
+                
+                <div id="tcc-description" class="tcc-intro" style="display: none;">
+                    <p>Olá, seja bem-vindo ao podcast "Raio-X: os 10 anos da Rádio Câmara Bauru". Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
                 </div>
 
                 <div class="portfolio-grid">
@@ -452,9 +465,17 @@
                     <div class="project-card" data-category="radio">
                         <div class="card-content">
                             <span class="card-category">Redação para Rádio</span>
-                            <h3 class="card-title">Boletins informativos (rádio)</h3>
+                            <h3 class="card-title">Boletins informativos</h3>
                             <p class="card-description">Conteúdo radiofônico destacando temas abordados por vereadores.</p>
                             <a href="https://docs.google.com/document/d/1WU_vOZGDfwZCZyTfxUbUvnkTOf6tnFhm_RVeJbfvGIQ/edit?tab=t.0" target="_blank" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="radio">
+                        <div class="card-content">
+                            <span class="card-category">Redação para Rádio</span>
+                            <h3 class="card-title">Notas de serviço</h3>
+                            <p class="card-description">Textos para programa de divulgação de eventos e serviços.</p>
+                            <a href="https://docs.google.com/document/d/1FbnsrYdc5VHUywvuNRIeol9eaS5P4iCcHLj4Sj7HNuY/edit?usp=sharing" target="_blank" class="cta-button card-link">Conferir</a>
                         </div>
                     </div>
 
@@ -547,6 +568,10 @@
                         <span>LinkedIn</span>
                         <a href="https://www.linkedin.com/in/guamaralz/" target="_blank">/in/guamaralz</a>
                     </div>
+                    <div class="contact-item">
+                        <span>Linktree</span>
+                        <a href="https://linktr.ee/guamaralz" target="_blank">/guamaralz</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -569,11 +594,21 @@
         // --- SCRIPT PARA FILTRO DO PORTFÓLIO ---
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
+        const tccDescription = document.getElementById('tcc-description');
+
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const filter = button.getAttribute('data-filter');
+
+                // Mostra ou esconde a descrição do TCC
+                if (filter === 'tcc') {
+                    tccDescription.style.display = 'block';
+                } else {
+                    tccDescription.style.display = 'none';
+                }
+
                 projectCards.forEach(card => {
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
                         card.style.display = 'flex';
