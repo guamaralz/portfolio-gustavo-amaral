@@ -49,6 +49,18 @@
             padding: 0 20px;
         }
 
+        /* --- ANIMAÇÃO FADE-IN --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* --- HEADER E NAVEGAÇÃO --- */
         .main-header {
             background-color: var(--white);
@@ -189,6 +201,7 @@
             padding: 20px;
             background-color: #f0f2e6; /* Verde bem claro */
             border-left: 5px solid var(--primary-color);
+            animation: fadeIn 0.5s ease;
         }
 
         .portfolio-grid {
@@ -205,6 +218,11 @@
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
+            opacity: 0; /* Começa invisível para animação */
+        }
+        
+        .project-card.visible {
+            animation: fadeIn 0.5s ease forwards;
         }
         
         .project-card:hover {
@@ -538,7 +556,7 @@
                  <div class="about-content">
                      <img src="https://imgur.com/aKZVH6f.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
                      <div class="about-text">
-                         <p>Minha experiência profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
+                         <p>Minha trajetória profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
                          <p>Possuo experiência com redação de pautas e criação de conteúdos para rádio, TV e redes sociais, além da produção de boletins informativos e podcasts.</p>
                      </div>
                  </div>
@@ -589,27 +607,43 @@
         const projectCards = document.querySelectorAll('.project-card');
         const tccDescription = document.getElementById('tcc-description');
 
+        // Função para aplicar o filtro e a animação
+        function applyFilter(filter) {
+            // Mostra ou esconde a descrição do TCC
+            if (filter === 'tcc') {
+                tccDescription.style.display = 'block';
+            } else {
+                tccDescription.style.display = 'none';
+            }
+
+            let delay = 0;
+            projectCards.forEach(card => {
+                card.style.display = 'none';
+                card.classList.remove('visible');
+
+                if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                    setTimeout(() => {
+                        card.style.display = 'flex';
+                        card.classList.add('visible');
+                    }, delay);
+                    delay += 100; // Aumenta o atraso para o próximo card
+                }
+            });
+        }
+
+        // Adiciona o evento de clique aos botões
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 const filter = button.getAttribute('data-filter');
-
-                // Mostra ou esconde a descrição do TCC
-                if (filter === 'tcc') {
-                    tccDescription.style.display = 'block';
-                } else {
-                    tccDescription.style.display = 'none';
-                }
-
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                applyFilter(filter);
             });
+        });
+
+        // Aplica o filtro inicial para 'Todos' quando a página carrega
+        document.addEventListener('DOMContentLoaded', () => {
+            applyFilter('all');
         });
     </script>
 </body>
