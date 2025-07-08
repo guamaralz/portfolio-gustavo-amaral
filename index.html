@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gustavo Amaral | Portfólio Jornalístico</title>
     
-    <meta name="description" content="Portfólio jornalístico de Gustavo Amaral, com trabalhos em comunicação institucional, rádio, mídias sociais e assessoria de imprensa.">
+    <meta name="description" content="Portfólio jornalístico de Gustavo Amaral, estudante de Jornalismo na UNESP, com trabalhos em comunicação institucional, rádio e TV.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
 
     <style>
         /* --- CONFIGURAÇÕES GLOBAIS --- */
         :root {
-            --primary-color: #1a2a45; /* Azul Marinho Escuro */
-            --secondary-color: #007bff; /* Azul Vibrante para Ações */
-            --background-color: #f8f9fa;
+            --primary-color: #6A7E4D; /* Verde Musgo */
+            --dark-color: #2c3e50; /* Azul Ardósia Escuro */
+            --background-color: #f8f9fa; /* Cinza bem claro */
             --text-color: #343a40;
             --light-gray: #e9ecef;
             --white: #ffffff;
-            --title-font: 'Arvo', serif;
-            --body-font: 'Roboto', sans-serif;
+            --title-font: 'Libre Baskerville', serif;
+            --meta-font: 'Space Mono', monospace;
         }
 
         *, *::before, *::after {
@@ -32,11 +32,11 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 80px; /* Ajuste para o header fixo */
+            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: var(--body-font);
+            font-family: var(--title-font);
             color: var(--text-color);
             background-color: var(--background-color);
         }
@@ -67,8 +67,9 @@
 
         .logo {
             font-family: var(--title-font);
+            font-weight: 700;
             font-size: 1.5rem;
-            color: var(--primary-color);
+            color: var(--dark-color);
             text-decoration: none;
         }
 
@@ -79,22 +80,23 @@
         }
 
         .main-nav a {
-            color: var(--primary-color);
+            font-family: var(--meta-font);
+            font-size: 0.9rem;
+            color: var(--dark-color);
             text-decoration: none;
-            font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .main-nav a:hover {
-            color: var(--secondary-color);
+            color: var(--primary-color);
         }
 
         .nav-toggle {
-            display: none; /* Oculto em desktop */
+            display: none;
             font-size: 2rem;
             background: none;
             border: none;
-            color: var(--primary-color);
+            color: var(--dark-color);
             cursor: pointer;
         }
 
@@ -107,8 +109,9 @@
         
         .hero h1 {
             font-family: var(--title-font);
+            font-weight: 700;
             font-size: 3.5rem;
-            color: var(--primary-color);
+            color: var(--dark-color);
             margin-bottom: 0.5rem;
         }
 
@@ -120,17 +123,18 @@
 
         .cta-button {
             display: inline-block;
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             color: var(--white);
+            font-family: var(--meta-font);
             padding: 15px 30px;
-            border-radius: 5px;
+            border: 2px solid var(--primary-color);
             text-decoration: none;
-            font-weight: 500;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .cta-button:hover {
-            background-color: #0056b3;
+            background-color: var(--white);
+            color: var(--primary-color);
             transform: translateY(-3px);
         }
 
@@ -142,13 +146,17 @@
         .section-title {
             font-family: var(--title-font);
             font-size: 2.5rem;
-            color: var(--primary-color);
+            font-weight: 700;
+            color: var(--dark-color);
             text-align: center;
             margin-bottom: 60px;
         }
         
         #portfolio {
             background-color: var(--white);
+        }
+        #contato {
+             background-color: var(--light-gray);
         }
 
         /* --- PORTFÓLIO --- */
@@ -157,21 +165,22 @@
             justify-content: center;
             gap: 15px;
             margin-bottom: 40px;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
+            font-family: var(--meta-font);
             background-color: var(--light-gray);
-            border: none;
+            border: 1px solid #ddd;
             padding: 10px 20px;
-            border-radius: 20px;
             cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .filter-btn:hover, .filter-btn.active {
             background-color: var(--primary-color);
             color: var(--white);
+            border-color: var(--primary-color);
         }
 
         .portfolio-grid {
@@ -183,8 +192,6 @@
         .project-card {
             background-color: var(--white);
             border: 1px solid var(--light-gray);
-            border-radius: 8px;
-            overflow: hidden;
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -199,35 +206,34 @@
             padding: 25px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Faz o conteúdo crescer */
+            flex-grow: 1;
         }
         
         .card-category {
             align-self: flex-start;
-            background-color: var(--light-gray);
-            color: var(--text-color);
-            padding: 5px 10px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            font-family: var(--meta-font);
+            color: var(--primary-color);
+            font-size: 0.85rem;
             margin-bottom: 15px;
         }
         
         .card-title {
             font-family: var(--title-font);
             font-size: 1.4rem;
+            font-weight: 700;
             margin-bottom: 10px;
+            color: var(--dark-color);
         }
         
         .card-description {
-            font-size: 0.95rem;
+            font-size: 1rem;
             line-height: 1.6;
-            flex-grow: 1; /* Empurra o botão para baixo */
+            flex-grow: 1;
             margin-bottom: 20px;
         }
         
         .card-link {
-            align-self: flex-start; /* Alinha o botão à esquerda */
+            align-self: flex-start;
         }
         
         /* --- SEÇÃO SOBRE --- */
@@ -242,17 +248,17 @@
             height: 250px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--white);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
         
         .about-text p {
             margin-bottom: 15px;
-            line-height: 1.7;
+            line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         /* --- SEÇÃO CONTATO E FOOTER --- */
-        #contato {
+        #contato .container {
              text-align: center;
         }
         
@@ -262,17 +268,19 @@
 
         .contact-links a {
             font-size: 1.2rem;
-            color: var(--secondary-color);
+            color: var(--primary-color);
             text-decoration: none;
             margin: 0 15px;
+            font-family: var(--meta-font);
         }
 
         .main-footer {
-            background-color: var(--primary-color);
+            background-color: var(--dark-color);
             color: var(--white);
             text-align: center;
             padding: 20px 0;
-            margin-top: 60px;
+            font-family: var(--meta-font);
+            font-size: 0.9rem;
         }
 
         /* --- RESPONSIVIDADE --- */
@@ -287,11 +295,11 @@
                 width: 100%;
                 background-color: var(--white);
                 flex-direction: column;
-                display: none; /* Escondido por padrão */
+                display: none;
                 border-bottom: 1px solid var(--light-gray);
             }
             .main-nav.active {
-                display: flex; /* Mostra o menu */
+                display: flex;
             }
             .main-nav ul {
                 flex-direction: column;
@@ -310,7 +318,6 @@
             
             .hero h1 { font-size: 2.5rem; }
             .about-content { flex-direction: column; text-align: center; }
-            .portfolio-filters { flex-wrap: wrap; }
         }
 
     </style>
@@ -323,8 +330,8 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre-mim">Sobre Mim</a></li>
                     <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
@@ -335,97 +342,98 @@
     <main>
         <section id="inicio" class="hero">
             <div class="container">
-                <h1>Portfólio Jornalístico</h1>
-                <p>Uma seleção de trabalhos acadêmicos e profissionais que refletem minha paixão pela comunicação e pelo jornalismo.</p>
-                <a href="#portfolio" class="cta-button">Ver meus trabalhos</a>
+                <h1>Jornalismo e Comunicação</h1>
+                <p>Um portfólio com trabalhos que demonstram minha dedicação em contar histórias e comunicar com clareza.</p>
+                <a href="#portfolio" class="cta-button">Conheça meus trabalhos</a>
             </div>
         </section>
 
-        <section id="portfolio" class="section">
-            <div class="container">
-                <h2 class="section-title">Meus Trabalhos</h2>
-
-                <div class="portfolio-filters">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="institucional">Institucional</button>
-                    <button class="filter-btn" data-filter="radio">Rádio</button>
-                    <button class="filter-btn" data-filter="midias">Mídias Sociais</button>
-                    <button class="filter-btn" data-filter="assessoria">Assessoria</button>
-                </div>
-
-                <div class="portfolio-grid">
-                    <div class="project-card" data-category="institucional">
-                        <div class="card-content">
-                            <span class="card-category">Institucional</span>
-                            <h3 class="card-title">Matéria sobre o Dia do Hino Nacional</h3>
-                            <p class="card-description">Produção de uma matéria para o site da Câmara Municipal de Bauru, visando destacar a importância do Hino Nacional como símbolo pátrio.</p>
-                            <a href="https://www.bauru.sp.leg.br/institucional/noticias/camara-de-bauru-celebra-o-dia-do-hino-nacional-brasileiro" target="_blank" class="cta-button card-link">Ver Matéria</a>
-                        </div>
-                    </div>
-                    <div class="project-card" data-category="institucional">
-                        <div class="card-content">
-                            <span class="card-category">Institucional</span>
-                            <h3 class="card-title">Entrevista com o Presidente da OAB Bauru</h3>
-                            <p class="card-description">Entrevista em vídeo realizada com o Dr. Márcio, Presidente da OAB Bauru, sobre a campanha "21 dias de Ativismo Contra o Racismo".</p>
-                            <a href="https://www.instagram.com/p/C6wG6e8gxKG/" target="_blank" class="cta-button card-link">Ver Vídeo</a>
-                        </div>
-                    </div>
-                    <div class="project-card" data-category="radio">
-                        <div class="card-content">
-                            <span class="card-category">Rádio</span>
-                            <h3 class="card-title">Boletim sobre o Dia da Indústria</h3>
-                            <p class="card-description">Produção de um boletim para a Rádio Câmara, entrevistando o Diretor Regional do CIESP sobre a importância da indústria para a cidade.</p>
-                            <a href="https://www.instagram.com/p/C7agqj8AwR3/" target="_blank" class="cta-button card-link">Ouvir Boletim</a>
-                        </div>
-                    </div>
-                    <div class="project-card" data-category="radio">
-                        <div class="card-content">
-                            <span class="card-category">Rádio</span>
-                            <h3 class="card-title">Boletim sobre a 'Semana do Lixo Zero'</h3>
-                            <p class="card-description">Boletim informativo sobre o evento 'Semana do Lixo Zero', destacando a participação da comunidade e os objetivos da iniciativa.</p>
-                            <a href="https://www.instagram.com/p/C7kS04fglO7/" target="_blank" class="cta-button card-link">Ouvir Boletim</a>
-                        </div>
-                    </div>
-                    <div class="project-card" data-category="midias">
-                        <div class="card-content">
-                            <span class="card-category">Mídias Sociais</span>
-                            <h3 class="card-title">Post sobre o 'Dia da Mata Atlântica'</h3>
-                            <p class="card-description">Criação de um post para as redes sociais da Câmara Municipal de Bauru, com o objetivo de conscientizar sobre a preservação da Mata Atlântica.</p>
-                            <a href="https://www.instagram.com/p/C7e-9JzOCGq/" target="_blank" class="cta-button card-link">Ver Post</a>
-                        </div>
-                    </div>
-                    <div class="project-card" data-category="assessoria">
-                        <div class="card-content">
-                            <span class="card-category">Assessoria de Imprensa</span>
-                            <h3 class="card-title">Divulgação do 'Trote Solidário'</h3>
-                            <p class="card-description">Divulgação para a imprensa do projeto de extensão 'Trote Solidário', da UNESP Bauru, visando ampliar o alcance e o engajamento da comunidade.</p>
-                            <a href="https://www.instagram.com/p/CbvYyqbuA6u/" target="_blank" class="cta-button card-link">Ver Divulgação</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="sobre" class="section">
+        <section id="sobre-mim" class="section">
             <div class="container">
                  <h2 class="section-title">Sobre Mim</h2>
                  <div class="about-content">
                      <img src="https://i.imgur.com/A53udGa.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
                      <div class="about-text">
-                         <p>Olá! Sou Gustavo Amaral, um comunicador em formação pela UNESP Bauru. Minha jornada no jornalismo começou com uma curiosidade por História e Geografia, que evoluiu para uma paixão por contar histórias e entender o mundo ao meu redor.</p>
-                         <p>Ao longo da minha trajetória acadêmica e profissional, tive a oportunidade de explorar diversas áreas da comunicação, desde a produção de conteúdo para rádio e mídias sociais até a comunicação institucional e assessoria de imprensa. Cada experiência fortaleceu minha crença no poder do jornalismo como ferramenta de transformação e conexão.</p>
+                         [cite_start]<p>Sou Gustavo Amaral, estudante de Jornalismo na Universidade Estadual Paulista - UNESP[cite: 43, 96]. [cite_start]Minha experiência profissional inclui atuação na comunicação institucional da Câmara Municipal de Bauru [cite: 6, 56][cite_start], onde fui responsável pela cobertura de sessões legislativas e pela criação de conteúdo para rádio e TV[cite: 9, 10, 60, 61].</p>
+                         [cite_start]<p>Além da vivência no setor público, possuo experiência com automação de marketing em ferramentas como Hubspot e RD Station, adquirida durante meu trabalho na Hubify[cite: 17, 67]. Busco unir a comunicação estratégica com a prática jornalística para construir narrativas de impacto.</p>
                      </div>
                  </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section">
+            <div class="container">
+                <h2 class="section-title">Portfólio</h2>
+
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all">Todos</button>
+                    <button class="filter-btn" data-filter="institucional">Matérias Institucionais</button>
+                    <button class="filter-btn" data-filter="tv">Pautas para TV</button>
+                    <button class="filter-btn" data-filter="radio">Redação para Rádio</button>
+                    <button class="filter-btn" data-filter="boletins">Boletins Informativos</button>
+                    <button class="filter-btn" data-filter="tcc">TCC</button>
+                </div>
+
+                <div class="portfolio-grid">
+                    <div class="project-card" data-category="institucional">
+                        <div class="card-content">
+                            <span class="card-category">Matérias Institucionais</span>
+                            <h3 class="card-title">Cobertura de Eventos</h3>
+                            [cite_start]<p class="card-description">Responsável pela cobertura de sessões legislativas e eventos institucionais na Câmara de Bauru e na FAAC, com produção de matérias para blogs e portais. [cite: 9, 39, 60, 92]</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="tv">
+                        <div class="card-content">
+                            <span class="card-category">Pautas para TV</span>
+                            <h3 class="card-title">Elaboração de Pautas para Entrevistas</h3>
+                            [cite_start]<p class="card-description">Criação e redação de pautas e roteiros para entrevistas em vídeo com autoridades locais, veiculadas nos canais de comunicação da TV Câmara. [cite: 8, 59]</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="radio">
+                        <div class="card-content">
+                            <span class="card-category">Redação para Rádio</span>
+                            <h3 class="card-title">Criação de Conteúdo para Rádio</h3>
+                            [cite_start]<p class="card-description">Desenvolvimento de textos, notas e roteiros adaptados para a linguagem radiofônica, utilizados na programação da Rádio Câmara. [cite: 10, 12, 61, 63]</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="boletins">
+                        <div class="card-content">
+                            <span class="card-category">Boletins Informativos</span>
+                            <h3 class="card-title">Gravação de Boletins com Autoridades</h3>
+                            [cite_start]<p class="card-description">Produção e gravação de boletins informativos em áudio e vídeo com autoridades, comunicando notícias e decisões de relevância pública. [cite: 8, 58]</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="institucional">
+                        <div class="card-content">
+                            <span class="card-category">Matérias Institucionais</span>
+                            <h3 class="card-title">Planejamento Estratégico</h3>
+                            [cite_start]<p class="card-description">Como membro da Diretoria Executiva do Jornal Jr., elaborei o planejamento estratégico do time de Comercial e preparei processos seletivos. [cite: 28, 29, 30, 76, 77, 78]</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                    <div class="project-card" data-category="tcc">
+                        <div class="card-content">
+                            <span class="card-category">TCC</span>
+                            <h3 class="card-title">Trabalho de Conclusão de Curso</h3>
+                            <p class="card-description">Atualmente em desenvolvimento, meu TCC explora [Tópico do TCC]. Mais detalhes e o trabalho completo serão disponibilizados em breve.</p>
+                            <a href="#" class="cta-button card-link">Conferir</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section id="contato" class="section">
             <div class="container">
                 <h2 class="section-title">Contato</h2>
-                <p>Gostou do meu trabalho ou tem alguma pergunta? Ficarei feliz em conversar.</p>
+                <p>Gostou do meu trabalho ou quer iniciar uma conversa? Entre em contato.</p>
                 <div class="contact-links">
                     <a href="mailto:guamaralitape@gmail.com">guamaralitape@gmail.com</a>
-                    <a href="https://www.linkedin.com/in/guamaralz" target="_blank">LinkedIn</a>
+                    <a href="https://linkedin.com/in/guamaralz" target="_blank">LinkedIn</a>
                 </div>
             </div>
         </section>
@@ -452,18 +460,16 @@
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remove a classe 'active' de todos os botões
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Adiciona a classe 'active' ao botão clicado
                 button.classList.add('active');
 
                 const filter = button.getAttribute('data-filter');
 
                 projectCards.forEach(card => {
+                    card.style.display = 'none'; // Oculta todos primeiro
                     if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        // Usamos 'flex' porque é o display original do card
                         card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
                     }
                 });
             });
