@@ -127,12 +127,12 @@
         }
 
         /* --- SEÇÃO HERO (INÍCIO) --- */
-.hero {
-    padding-top: 180px;
-    padding-bottom: 120px;
-    text-align: center;
-    background-color: var(--background-color); /* Alterado de --light-gray para --background-color */
-}
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            text-align: center;
+            background-color: var(--background-color);
+        }
         
         .hero h1 {
             font-weight: 700;
@@ -308,6 +308,29 @@
             margin-bottom: 15px;
             line-height: 1.8;
             font-size: 1.1rem;
+        }
+
+        /* --- ESTILOS PARA A LISTA DE EXPERIÊNCIAS (NOVO) --- */
+        .experience-list {
+            list-style: none;
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .experience-list svg {
+            width: 22px;
+            height: 22px;
+            color: var(--primary-color);
+            flex-shrink: 0;
         }
 
         /* --- SEÇÃO CONTATO E FOOTER --- */
@@ -568,7 +591,29 @@
                      <img src="https://imgur.com/aKZVH6f.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
                      <div class="about-text">
                          <p>Minha trajetória profissional inclui atuação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D.Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
-                         <p>Possuo experiência com redação de pautas e criação de conteúdos para rádio, TV e redes sociais, além da produção de boletins informativos e podcasts.</p>
+                         
+                         <!-- Início da alteração: Checklist de experiências -->
+                         <p style="margin-top: 15px; font-weight: 700;">Possuo experiência com:</p>
+                         <ul class="experience-list">
+                             <li>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                 <span>Criação de conteúdos para rádio, TV e redes sociais</span>
+                             </li>
+                             <li>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                 <span>Redação de pautas e roteiros</span>
+                             </li>
+                              <li>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                 <span>Gravação de boletins informativos</span>
+                             </li>
+                             <li>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                 <span>Gravação de podcasts</span>
+                             </li>
+                         </ul>
+                         <!-- Fim da alteração -->
+
                      </div>
                  </div>
             </div>
@@ -601,7 +646,7 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Gustavo Amaral. Todos os direitos reservados.</p>
+            <p>© 2025 Gustavo Amaral. Todos os direitos reservados.</p>
         </div>
     </footer>
 
