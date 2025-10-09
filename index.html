@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Amaral | Apresentação</title>
+    <title>Gustavo Amaral | Jornalista</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -13,19 +13,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CONFIGURAÇÕES GLOBAIS --- */
+        /* --- CONFIGURAÇÕES GLOBAIS E NOVA IDENTIDADE VISUAL --- */
         :root {
-            --primary-color: #556B2F; /* Verde Musgo */
-            --dark-color: #2c3e50;    /* Azul Ardósia Escuro */
-            --background-color: #f8f9fa;
-            --text-color: #343a40;
+            --primary-color: #005f73;    /* Azul Petróleo */
+            --accent-color: #ee9b00;     /* Âmbar/Laranja */
+            --dark-color: #212529;       /* Cinza Quase Preto */
+            --text-color: #495057;       /* Cinza Médio */
+            --background-color: #FDFBF7; /* Branco Gelo */
             --light-gray: #e9ecef;
             --white: #ffffff;
-            --title-font: 'Libre Baskerville', serif;
-            --meta-font: 'Space Mono', monospace;
+            --title-font: 'Poppins', sans-serif;
+            --body-font: 'Inter', sans-serif;
         }
 
         *, *::before, *::after {
@@ -40,7 +41,7 @@
         }
 
         body {
-            font-family: var(--title-font);
+            font-family: var(--body-font);
             color: var(--text-color);
             background-color: var(--background-color);
             line-height: 1.7;
@@ -56,28 +57,21 @@
         .instagram-media {
             background: #FFF;
             border: 0;
-            border-radius: 3px;
-            box-shadow: 0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);
-            margin: 1px auto !important; /* Centralizar e ajustar margem */
+            border-radius: 8px; /* Borda mais suave */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin: 1px auto !important;
             max-width: 540px;
             min-width: 326px;
             padding: 0;
             width: calc(100% - 2px);
         }
 
-        /* --- ANIMAÇÃO FADE-IN --- */
+        /* --- ANIMAÇÕES --- */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Classes para animação ao rolar */
         .fade-in-section {
             opacity: 0;
             transform: translateY(30px);
@@ -91,7 +85,8 @@
 
         /* --- HEADER E NAVEGAÇÃO --- */
         .main-header {
-            background-color: var(--white);
+            background-color: rgba(253, 251, 247, 0.9); /* Fundo com transparência */
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--light-gray);
             padding: 15px 0;
             position: fixed;
@@ -110,7 +105,7 @@
         .logo {
             font-family: var(--title-font);
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             color: var(--dark-color);
             text-decoration: none;
         }
@@ -118,20 +113,33 @@
         .main-nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 30px;
         }
 
         .main-nav a {
-            font-family: var(--meta-font);
-            font-size: 0.9rem;
+            font-family: var(--body-font);
+            font-weight: 500;
+            font-size: 1rem;
             color: var(--dark-color);
             text-decoration: none;
+            position: relative;
+            padding-bottom: 5px;
             transition: color 0.3s ease;
         }
 
-        .main-nav a:hover {
-            color: var(--primary-color);
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
         }
+
+        .main-nav a:hover { color: var(--primary-color); }
+        .main-nav a:hover::after { width: 100%; }
 
         .nav-toggle {
             display: none;
@@ -144,83 +152,103 @@
 
         /* --- SEÇÃO HERO (INÍCIO) --- */
         .hero {
-            padding-top: 180px;
-            padding-bottom: 120px;
+            padding-top: 200px;
+            padding-bottom: 150px;
             text-align: center;
-            background-color: var(--background-color);
         }
         
         .hero h1 {
+            font-family: var(--title-font);
             font-weight: 700;
-            font-size: 3.5rem;
+            font-size: 4rem; /* Maior para mais impacto */
             color: var(--dark-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-color); /* Destaque no nome */
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            color: var(--text-color);
         }
 
         .cta-button {
             display: inline-block;
             background-color: var(--primary-color);
             color: var(--white);
-            font-family: var(--meta-font);
-            padding: 15px 30px;
+            font-family: var(--body-font);
+            font-weight: 500;
+            padding: 15px 35px;
             border: 2px solid var(--primary-color);
-            border-radius: 5px;
+            border-radius: 50px; /* Botões arredondados */
             text-decoration: none;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 95, 115, 0.2);
         }
         
         .cta-button:hover {
             background-color: var(--white);
             color: var(--primary-color);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.25);
         }
+        
+        .card-link { box-shadow: none; } /* Remover sombra do botão no card */
 
         /* --- SEÇÕES GERAIS --- */
-        .section {
-            padding: 80px 0;
-        }
+        .section { padding: 100px 0; }
 
         .section-title {
-            font-size: 2.5rem;
+            font-family: var(--title-font);
+            font-size: 2.8rem;
             font-weight: 700;
             color: var(--dark-color);
             text-align: center;
             margin-bottom: 60px;
+            position: relative;
+        }
+        
+        /* Linha decorativa para os títulos */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
         
         #portfolio { background-color: var(--white); }
-        #contato { background-color: var(--light-gray); }
+        #contato { background-color: var(--background-color); }
 
         /* --- PORTFÓLIO --- */
-        .portfolio-filters {
+        .portfolio-filters, .secondary-filters-container {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px; /* Reduzido para dar espaço aos filtros secundários */
+            gap: 15px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
-
         .secondary-filters-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            min-height: 42px; /* Evita que o layout pule quando os filtros aparecem */
+            margin-bottom: 50px;
+            min-height: 42px;
         }
 
         .filter-btn, .secondary-filter-btn {
-            font-family: var(--meta-font);
-            background-color: var(--light-gray);
-            border: 1px solid #ddd;
-            padding: 10px 20px;
-            border-radius: 20px;
+            font-family: var(--body-font);
+            font-weight: 500;
+            background-color: var(--white);
+            border: 1px solid var(--light-gray);
+            padding: 10px 25px;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -230,32 +258,35 @@
             background-color: var(--primary-color);
             color: var(--white);
             border-color: var(--primary-color);
+            transform: translateY(-2px);
         }
         
         .tcc-intro {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 40px;
-            padding: 20px;
-            background-color: #f0f2e6;
-            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            background-color: #f7f9fc;
+            border-left: 5px solid var(--accent-color);
             animation: fadeIn 0.5s ease;
+            border-radius: 0 8px 8px 0;
         }
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
         }
 
         .project-card {
             background-color: var(--white);
             border: 1px solid var(--light-gray);
-            border-radius: 8px;
+            border-radius: 12px; /* Bordas mais arredondadas */
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             opacity: 0;
         }
         
@@ -264,12 +295,12 @@
         }
         
         .project-card:hover {
-             transform: translateY(-5px);
-             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card-content {
-            padding: 25px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -277,24 +308,27 @@
         
         .card-category {
             align-self: flex-start;
-            font-family: var(--meta-font);
-            color: var(--primary-color);
-            font-size: 0.85rem;
+            font-family: var(--body-font);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 500;
             margin-bottom: 15px;
         }
         
         .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-family: var(--title-font);
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: 10px;
             color: var(--dark-color);
+            line-height: 1.3;
         }
         
         .card-description {
             font-size: 1rem;
             line-height: 1.6;
             flex-grow: 1;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .card-link { align-self: flex-start; }
@@ -318,45 +352,75 @@
         /* --- SEÇÃO SOBRE MIM --- */
         .about-content {
             display: flex;
-            align-items: center;
-            gap: 50px;
+            align-items: flex-start;
+            gap: 60px;
         }
         
         .about-photo {
-            width: 250px;
-            height: 250px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0, 95, 115, 0.2);
         }
         
-        .about-text p {
-            margin-bottom: 15px;
-            line-height: 1.8;
-            font-size: 1.1rem;
+        .about-text {
+            flex-grow: 1;
         }
 
-        /* --- ESTILOS PARA A LISTA DE EXPERIÊNCIAS --- */
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .experience-section { margin-top: 40px; }
+
+        .experience-title {
+            font-family: var(--title-font);
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+
         .experience-list {
             list-style: none;
-            margin-top: 10px;
             padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas */
+            gap: 15px;
         }
 
         .experience-list li {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1.05rem;
         }
 
         .experience-list svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             color: var(--primary-color);
             flex-shrink: 0;
+        }
+
+        .experience-logos {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 25px;
+        }
+        .experience-logos img {
+            height: 40px; /* Ajuste a altura conforme necessário */
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .experience-logos img:hover {
+            opacity: 1;
         }
 
         /* --- SEÇÃO CONTATO E FOOTER --- */
@@ -365,34 +429,42 @@
         .contact-info-grid {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
         
         .contact-item a {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--dark-color);
             text-decoration: none;
-            font-family: var(--meta-font);
+            font-weight: 500;
             display: block;
+            transition: color 0.3s ease;
         }
+        .contact-item a:hover { color: var(--primary-color); }
+
         .contact-item span {
             font-size: 0.9rem;
-            color: var(--primary-color);
+            color: var(--text-color);
             display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .main-footer {
             background-color: var(--dark-color);
             color: var(--white);
             text-align: center;
-            padding: 20px 0;
-            font-family: var(--meta-font);
+            padding: 25px 0;
             font-size: 0.9rem;
         }
 
         /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .experience-list { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 768px) {
             .nav-toggle { display: block; }
             .main-nav {
@@ -409,8 +481,12 @@
             .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
             .main-nav li { width: 100%; }
             .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
-            .hero h1 { font-size: 2.5rem; }
-            .about-content { flex-direction: column; text-align: center; }
+            .main-nav a:hover::after { display: none; } /* Esconde efeito hover em mobile */
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .about-content { flex-direction: column; text-align: center; align-items: center; }
+            .about-photo { width: 200px; height: 200px; }
+            .experience-logos { justify-content: center; }
         }
     </style>
 </head>
