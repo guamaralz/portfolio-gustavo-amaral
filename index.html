@@ -551,7 +551,6 @@
         }
 
         /* --- SEÇÃO CONTATO E FOOTER --- */
-        #contato .container { text-align: center; }
         
         .contact-info-grid {
             display: flex;
@@ -570,7 +569,10 @@
             transition: color 0.3s ease;
         }
         .contact-item a:hover { color: var(--primary-color); }
-
+.contact-item {
+            text-align: left; /* Garante alinhamento à esquerda */
+        }
+        
         .contact-item span {
             font-size: 0.9rem;
             color: var(--text-color);
