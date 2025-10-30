@@ -1,1468 +1,1281 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gustavo Amaral | Jornalista</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="description" content="Portfólio de Gustavo Amaral, jornalista formado pela Unesp, com trabalhos em rádio, TV e internet.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- CONFIGURAções GLOBAIS E NOVA IDENTIDADE VISUAL --- */
-        :root {
-            --primary-color: #005f73;    /* Azul Petróleo */
-            --accent-color: #ee9b00;     /* Âmbar/Laranja */
-            --dark-color: #212529;       /* Cinza Quase Preto */
-            --text-color: #495057;       /* Cinza Médio */
-            --background-color: #FDFBF7; /* Branco Gelo */
-            --light-gray: #e9ecef;
-            --white: #ffffff;
-            --title-font: 'Poppins', sans-serif;
-            --body-font: 'Inter', sans-serif;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
-        body {
-            font-family: var(--body-font);
-            color: var(--text-color);
-            background-color: var(--background-color);
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* --- ESTILO PARA O BLOCKQUOTE DO INSTAGRAM --- */
-        .instagram-media {
-            background: #FFF;
-            border: 0;
-            border-radius: 8px; /* Borda mais suave */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            margin: 1px auto !important;
-            max-width: 540px;
-            min-width: 326px;
-            padding: 0;
-            width: calc(100% - 2px);
-        }
-
-        /* --- ANIMAções --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- HEADER E NAVEGAÇÃO --- */
-        .main-header {
-            background-color: rgba(253, 251, 247, 0.9); /* Fundo com transparência */
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--light-gray);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .main-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--title-font);
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: var(--dark-color);
-            text-decoration: none;
-        }
-
-        .main-nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .main-nav a {
-            font-family: var(--body-font);
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--dark-color);
-            text-decoration: none;
-            position: relative;
-            padding-bottom: 5px;
-            transition: color 0.3s ease;
-        }
-
-        .main-nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .main-nav a:hover { color: var(--primary-color); }
-        .main-nav a:hover::after { width: 100%; }
-
-        .nav-toggle {
-            display: none;
-            font-size: 2rem;
-            background: none;
-            border: none;
-            color: var(--dark-color);
-            cursor: pointer;
-        }
-
-        /* --- SEÇÃO HERO (INÍCIO) --- */
-        .hero {
-            text-align: center;
-            min-height: 100vh; /* Garante que ocupe pelo menos a tela inteira */
-            display: flex;
-            align-items: center; /* Centraliza verticalmente */
-            justify-content: center; /* Centraliza horizontalmente */
-            padding-top: 80px; 
-            padding-bottom: 40px;
-        }
-        
-        .hero h1 {
-            font-family: var(--title-font);
-            font-weight: 700;
-            font-size: 4rem; /* Maior para mais impacto */
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-        
-        .hero h1 span {
-            color: var(--primary-color); /* Destaque no nome */
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 650px;
-            margin: 0 auto 40px;
-            color: var(--text-color);
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            font-family: var(--body-font);
-            font-weight: 500;
-            padding: 15px 35px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50px; /* Botões arredondados */
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 95, 115, 0.2);
-            cursor: pointer; /* Adicionado para botões não-link */
-        }
-        
-        .cta-button:hover {
-            background-color: var(--white);
-            color: var(--primary-color);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.25);
-        }
-        
-        .card-link { box-shadow: none; } 
-
-        /* --- SEÇÕES GERAIS --- */
-        .section { padding: 100px 0; }
-
-        .section-title {
-            font-family: var(--title-font);
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        /* Linha decorativa para os títulos */
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        #portfolio { background-color: var(--white); }
-        #contato { background-color: var(--background-color); }
-
-        /* --- PORTFÓLIO --- */
-        .portfolio-filters, .secondary-filters-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        .secondary-filters-container {
-            margin-bottom: 50px;
-            min-height: 42px;
-        }
-
-        .filter-btn, .secondary-filter-btn {
-            font-family: var(--body-font);
-            font-weight: 500;
-            background-color: var(--white);
-            border: 1px solid var(--light-gray);
-            padding: 10px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover, .filter-btn.active,
-        .secondary-filter-btn:hover, .secondary-filter-btn.active {
-            background-color: var(--primary-color);
-            color: var(--white);
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .tcc-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            padding: 25px;
-            background-color: #f7f9fc;
-            border-left: 5px solid var(--accent-color);
-            animation: fadeIn 0.5s ease;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-
-        /* --- [INÍCIO] ESTILOS PARA O EFEITO DE VIRAR O CARD --- */
-        .project-card {
-            background-color: transparent;
-            border: none;
-            box-shadow: none;
-            display: flex; 
-            flex-direction: column;
-            transition: transform 0.3s ease;
-            overflow: visible; 
-            opacity: 0;
-            perspective: 1500px;
-        }
-        
-        /* Card de TCC (sem flip) não precisa de perspectiva */
-        .project-card[data-secondary-category="tcc"] {
-            perspective: unset;
-            overflow: hidden; /* Volta ao original */
-            opacity: 0;
-            /* Readiciona estilos básicos que foram removidos */
-            background-color: var(--white);
-            border: 1px solid var(--light-gray);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-radius: 12px;
-        }
-
-        .project-card[data-secondary-category="tcc"]:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-        }
-
-        .project-card.visible {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        
-        /* Impede o hover de levantar o card enquanto ele está virando */
-        .project-card:not(.is-flipped):not([data-secondary-category="tcc"]):hover {
-            transform: translateY(-8px);
-            box-shadow: none;
-        }
-
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card.is-flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front,
-        .card-back {
-            background-color: var(--white);
-            border: 1px solid var(--light-gray);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .card-front {
-            position: relative; 
-            flex-grow: 1; 
-        }
-
-        .card-back {
-            position: absolute; 
-            top: 0;
-            left: 0;
-            height: 100%; 
-            transform: rotateY(180deg);
-
-            padding: 30px;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--dark-color);
-        }
-
-        .project-card:hover .card-front,
-        .project-card:hover .card-back {
-             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-        }
-
-        .card-back h3 {
-            font-family: var(--title-font);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-        
-        .card-back p {
-            font-size: 1rem;
-            margin-bottom: 25px;
-        }
-        
-        .card-actions {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: auto; /* Empurra para a base do card-content */
-        }
-        
-        /* [INÍCIO DA ALTERAÇÃO] Estilo do botão de virar o card */
-        .card-flip-btn {
-            position: absolute;
-            bottom: 30px;
-            right: 30px;
-            width: 32px; /* Tamanho da bolinha */
-            height: 32px; /* Tamanho da bolinha */
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            color: var(--white);
-            border: none;
-            font-size: 1.5rem; /* Tamanho do "+" */
-            font-weight: 700;
-            line-height: 1; /* Alinha o "+" verticalmente */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-        .card-flip-btn:hover {
-            transform: scale(1.1);
-            background-color: var(--primary-color);
-        }
-        /* [FIM DA ALTERAÇÃO] --- */
-        
-
-        .card-content {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .card-category {
-            align-self: flex-start;
-            font-family: var(--body-font);
-            color: var(--accent-color);
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-        
-        .card-title {
-            font-family: var(--title-font);
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--dark-color);
-            line-height: 1.3;
-        }
-        
-        .card-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            flex-grow: 1;
-            margin-bottom: 25px;
-        }
-        
-        .embed-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            padding-top: 56.25%;
-            margin-bottom: 15px;
-        }
-        .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        
-        /* --- SEÇÃO SOBRE MIM --- */
-        .about-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 60px;
-        }
-        
-        .about-photo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: 0 10px 30px rgba(0, 95, 115, 0.2);
-        }
-        
-        .about-text {
-            flex-grow: 1;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-        
-        .experience-section { margin-top: 40px; }
-
-        .experience-title {
-            font-family: var(--title-font);
-            font-weight: 600;
-            font-size: 1.3rem;
-            color: var(--dark-color);
-            margin-bottom: 20px;
-        }
-
-        .experience-list {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Duas colunas */
-            gap: 15px;
-        }
-
-        .experience-list li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.05rem;
-        }
-
-        .experience-list svg {
-            width: 24px;
-            height: 24px;
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
-
-        .experience-logos {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            border-top: 1px solid var(--light-gray);
-            padding-top: 25px;
-        }
-        .experience-logos img {
-            height: 40px; /* Ajuste a altura conforme necessário */
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-        .experience-logos img:hover {
-            opacity: 1;
-        }
-
-        /* --- SEÇÃO CONTATO E FOOTER --- */
-        #contato .container { text-align: center; }
-        
-        .contact-info-grid {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        
-        .contact-item a {
-            font-size: 1.2rem;
-            color: var(--dark-color);
-            text-decoration: none;
-            font-weight: 500;
-            display: block;
-            transition: color 0.3s ease;
-        }
-        .contact-item a:hover { color: var(--primary-color); }
-
-        .contact-item span {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            display: block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .main-footer {
-            background-color: var(--dark-color);
-            color: var(--white);
-            text-align: center;
-            padding: 25px 0;
-            font-size: 0.9rem;
-        }
-
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 992px) {
-            .experience-list { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-toggle { display: block; }
-            .main-nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                flex-direction: column;
-                display: none;
-                border-bottom: 1px solid var(--light-gray);
-            }
-            .main-nav.active { display: flex; }
-            .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
-            .main-nav li { width: 100%; }
-            .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
-            .main-nav a:hover::after { display: none; } /* Esconde efeito hover em mobile */
-            .hero h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.2rem; }
-            .about-content { flex-direction: column; text-align: center; align-items: center; }
-            .about-photo { width: 200px; height: 200px; }
-            .experience-logos { justify-content: center; }
-        }
-    </style>
-</head>
-<body>
-
-    <header class="main-header">
-        <div class="container">
-            <a href="#" class="logo">Gustavo Amaral</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#inicio">Início</a></li>
-                    <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#sobre-mim">Sobre Mim</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
-        </div>
-    </header>
-
-    <main>
-        <section id="inicio" class="hero">
-            <div class="container fade-in-section">
-                <h1>Olá, seja bem-vindo(a)! </h1>
-                <p>Sou Gustavo Amaral, jornalista formado pela Unesp.</p>
-                <a href="#portfolio" class="cta-button">Conheça meus trabalhos</a>
-            </div>
-        </section>
-
-        <section id="portfolio" class="section">
-            <div class="container fade-in-section">
-                <h2 class="section-title">Portfólio</h2>
-
-                <div class="portfolio-filters">
-                    <button class="filter-btn active" data-primary-filter="all">Todos</button>
-                    <button class="filter-btn" data-primary-filter="unesp">Unesp</button>
-                    <button class="filter-btn" data-primary-filter="camara">Câmara Municipal de Bauru</button>
-                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
-                </div>
-
-                <div class="secondary-filters-container">
-                    <div data-group="unesp" style="display: none;">
-                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
-                    </div>
-                    <div data-group="camara" style="display: none;">
-                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
-                    </div>
-                    <div data-group="fai" style="display: none;">
-                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
-                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
-                    </div>
-                </div>
-                
-                <div id="tcc-description" class="tcc-intro" style="display: none;">
-                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
-                    <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
-                </div>
-
-                <div class="portfolio-grid">
-                    
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | FAI</span>
-                                    <h3 class="card-title">FAI adquire 2,6 mil novos mobiliários para as salas de aula</h3>
-                                    <p class="card-description">Investimento reforça o compromisso da instituição com o bem-estar dos estudantes</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10035" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | FAI</span>
-                                    <h3 class="card-title">FAI firma parceria com a Receita Federal e implanta o Núcleo de Apoio Contábil e Fiscal (NAF)</h3>
-                                    <p class="card-description">Iniciativa integra o plano de renovação e consolidação dos cursos de Administração e Ciências Contábeis, sob coordenação do Prof. Me. Rogério Buchala</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10185" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                     <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | FAI</span>
-                                    <h3 class="card-title">FAI conquista aprovação de Programa de Residência Médica em Medicina de Família e Comunidade</h3>
-                                    <p class="card-description">Iniciativa formará especialistas para fortalecer a rede de saúde de Adamantina e região</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10125" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="reels">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPRCfZtjj5L/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DNoRdjCJh6h/?utm_source=ig_embed&utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80 541,80 C549.148,80 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Ver essa foto no Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DNoRdjCJh6h/?utm_source=ig_embed&utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Uma publicação compartilhada por Gustavo Amaral (@guamaralz)</a></p></div></blockquote>
-                                <div class="card-content">
-                                    <span class="card-category">Cobertura</span>
-                                    <h3 class="card-title">Mostra de Profissões 2025</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="reels">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DPG_rDrDgsG/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DNyhA7lXL8I/?utm_source=ig_embed&utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80 541,80 C549.148,80 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Ver essa foto no Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DNyhA7lXL8I/?utm_source=ig_embed&utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Uma publicação compartilhada por Gustavo Amaral (@guamaralz)</a></p></div></blockquote>
-                                <div class="card-content">
-                                    <span class="card-category">Cobertura</span>
-                                    <h3 class="card-title">Ação Social Jardim Brasil</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="reels">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DOUjvBWDgZ_/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"><div style="padding:16px;"> <a href="https://www.instagram.com/reel/DOUjvBWDgZ_/?utm_source=ig_embed&utm_campaign=loading" style=" background:#FFFFFF; line-height:0; padding:0 0; text-align:center; text-decoration:none; width:100%;" target="_blank"> <div style=" display: flex; flex-direction: row; align-items: center;"> <div style="background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 40px; margin-right: 14px; width: 40px;"></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 100px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 60px;"></div></div></div><div style="padding: 19% 0;"></div> <div style="display:block; height:50px; margin:0 auto 12px; width:50px;"><svg width="50px" height="50px" viewBox="0 0 60 60" version="1.1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-511.000000, -20.000000)" fill="#000000"><g><path d="M556.869,30.41 C554.814,30.41 553.148,32.076 553.148,34.131 C553.148,36.186 554.814,37.852 556.869,37.852 C558.924,37.852 560.59,36.186 560.59,34.131 C560.59,32.076 558.924,30.41 556.869,30.41 M541,60.657 C535.114,60.657 530.342,55.887 530.342,50 C530.342,44.114 535.114,39.342 541,39.342 C546.887,39.342 551.658,44.114 551.658,50 C551.658,55.887 546.887,60.657 541,60.657 M541,33.886 C532.1,33.886 524.886,41.1 524.886,50 C524.886,58.899 532.1,66.113 541,66.113 C549.9,66.113 557.115,58.899 557.115,50 C557.115,41.1 549.9,33.886 541,33.886 M565.378,62.101 C565.244,65.022 564.756,66.606 564.346,67.663 C563.803,69.06 563.154,70.057 562.106,71.106 C561.058,72.155 560.06,72.803 558.662,73.347 C557.607,73.757 556.021,74.244 553.102,74.378 C549.944,74.521 548.997,74.552 541,74.552 C533.003,74.552 532.056,74.521 528.898,74.378 C525.979,74.244 524.393,73.757 523.338,73.347 C521.94,72.803 520.942,72.155 519.894,71.106 C518.846,70.057 518.197,69.06 517.654,67.663 C517.244,66.606 516.755,65.022 516.623,62.101 C516.479,58.943 516.448,57.996 516.448,50 C516.448,42.003 516.479,41.056 516.623,37.899 C516.755,34.978 517.244,33.391 517.654,32.338 C518.197,30.938 518.846,29.942 519.894,28.894 C520.942,27.846 521.94,27.196 523.338,26.654 C524.393,26.244 525.979,25.756 528.898,25.623 C532.057,25.479 533.004,25.448 541,25.448 C548.997,25.448 549.943,25.479 553.102,25.623 C556.021,25.756 557.607,26.244 558.662,26.654 C560.06,27.196 561.058,27.846 562.106,28.894 C563.154,29.942 563.803,30.938 564.346,32.338 C564.756,33.391 565.244,34.978 565.378,37.899 C565.522,41.056 565.552,42.003 565.552,50 C565.552,57.996 565.522,58.943 565.378,62.101 M570.82,37.631 C570.674,34.438 570.167,32.258 569.425,30.349 C568.659,28.377 567.633,26.702 565.965,25.035 C564.297,23.368 562.623,22.342 560.652,21.575 C558.743,20.834 556.562,20.326 553.369,20.18 C550.169,20.033 549.148,20 541,20 C532.853,20 531.831,20.033 528.631,20.18 C525.438,20.326 523.257,20.834 521.349,21.575 C519.376,22.342 517.703,23.368 516.035,25.035 C514.368,26.702 513.342,28.377 512.574,30.349 C511.834,32.258 511.326,34.438 511.181,37.631 C511.035,40.831 511,41.851 511,50 C511,58.147 511.035,59.17 511.181,62.369 C511.326,65.562 511.834,67.743 512.574,69.651 C513.342,71.625 514.368,73.296 516.035,74.965 C517.703,76.634 519.376,77.658 521.349,78.425 C523.257,79.167 525.438,79.673 528.631,79.82 C531.831,79.965 532.853,80 541,80 C549.148,80 550.169,79.965 553.369,79.82 C556.562,79.673 558.743,79.167 560.652,78.425 C562.623,77.658 564.297,76.634 565.965,74.965 C567.633,73.296 568.659,71.625 569.425,69.651 C570.167,67.743 570.674,65.562 570.82,62.369 C570.966,59.17 571,58.147 571,50 C571,41.851 570.966,40.831 570.82,37.631"></path></g></g></g></svg></div><div style="padding-top: 8px;"> <div style=" color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:550; line-height:18px;">Ver essa foto no Instagram</div></div><div style="padding: 12.5% 0;"></div> <div style="display: flex; flex-direction: row; margin-bottom: 14px; align-items: center;"><div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(0px) translateY(7px);"></div> <div style="background-color: #F4F4F4; height: 12.5px; transform: rotate(-45deg) translateX(3px) translateY(1px); width: 12.5px; flex-grow: 0; margin-right: 14px; margin-left: 2px;"></div> <div style="background-color: #F4F4F4; border-radius: 50%; height: 12.5px; width: 12.5px; transform: translateX(9px) translateY(-18px);"></div></div><div style="margin-left: 8px;"> <div style=" background-color: #F4F4F4; border-radius: 50%; flex-grow: 0; height: 20px; width: 20px;"></div> <div style=" width: 0; height: 0; border-top: 2px solid transparent; border-left: 6px solid #f4f4f4; border-bottom: 2px solid transparent; transform: translateX(16px) translateY(-4px) rotate(30deg)"></div></div><div style="margin-left: auto;"> <div style=" width: 0px; border-top: 8px solid #F4F4F4; border-right: 8px solid transparent; transform: translateY(16px);"></div> <div style=" background-color: #F4F4F4; flex-grow: 0; height: 12px; width: 16px; transform: translateY(-4px);"></div> <div style=" width: 0; height: 0; border-top: 8px solid #F4F4F4; border-left: 8px solid transparent; transform: translateY(-4px) translateX(8px);"></div></div></div> <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; margin-bottom: 24px;"> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; margin-bottom: 6px; width: 224px;"></div> <div style=" background-color: #F4F4F4; border-radius: 4px; flex-grow: 0; height: 14px; width: 144px;"></div></div></a><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/reel/DOUjvBWDgZ_/?utm_source=ig_embed&utm_campaign=loading" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">Uma publicação compartilhada por Gustavo Amaral (@guamaralz)</a></p></div></blockquote>
-                                <div class="card-content">
-                                    <span class="card-category">Cobertura</span>
-                                    <h3 class="card-title">ExpoVerde 2025</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | Unesp</span>
-                                    <h3 class="card-title">Bibliotecárias da Unesp</h3>
-                                    <p class="card-description">Formadas em Biblioteconomia, Célia e Minervina contam suas trajetórias e visões</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.faac.unesp.br/#!/noticia/1934/bibliotecarias-da-unesp-de-bauru/" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | Unesp</span>
-                                    <h3 class="card-title">Setembro Amarelo: O serviço do NTAPS</h3>
-                                    <p class="card-description">Confira como funciona a entidade na universidade</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.faac.unesp.br/#!/noticia/1896/setembro-amarelo-o-servico-do-ntaps/" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="materias">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Matéria Institucional | Unesp</span>
-                                    <h3 class="card-title">Prêmio das mulheres: Adélia Borges é primeira Drª h.c. da Unesp</h3>
-                                    <p class="card-description">Sessão solene do Conselho Universitário entrega título Drª Honoris Causa à designer</p>
-                                    <div class="card-actions">
-                                        <a href="https://www.faac.unesp.br/#!/noticia/1994/premio-das-mulheres-adelia-borges-e-primeira-dr-hc-da-unesp/" target="_blank" class="cta-button card-link">Conferir</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/6uldwzOxMfTCDSamJGqiEL?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                     <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/0HuZi7GTgFiuxFWTP7jVUu?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                     <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/1bSkIbugyIOFKm3zkDkl67?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                     <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/4b8BS2UqgSyivGf4LYVUnE?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/1yUantvXuYBrgRmjDm3Cdl?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="unesp" data-secondary-category="tcc">
-                        <div class="card-content">
-                            <iframe style="border-radius:8px; border:0;" src="https://open.spotify.com/embed/episode/1Wf2evzoubaPrplxhbvYOU?utm_source=generator" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="tv">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/Jh2IA-MR9kw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Pauta para TV</span>
-                                    <h3 class="card-title">Entrevista sobre Mudanças Climáticas Extremas</h3>
-                                    <p class="card-description">Pauta para entrevista sobre as mudanças climáticas extremas e o impacto nas cidades.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1Dj_tqumgRMEsn6u7N7It3eDr6Xcz75Gk/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir pauta</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="tv">
-                         <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                     <iframe src="https://www.youtube.com/embed/GwJrXmtNahE" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Pauta para TV</span>
-                                    <h3 class="card-title">Entrevista sobre a Reforma do Código Civil</h3>
-                                    <p class="card-description">Pauta para entrevista sobre a Reforma do Código Civil.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1UqjnOah2wubRioO2Sr4furnWjIx4AfgL/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir pauta</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="tv">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/HGgfJI6cV4w" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Pauta para TV</span>
-                                    <h3 class="card-title">Entrevista sobre compra de votos </h3>
-                                    <p class="card-description">Pauta para entrevista sobre compra de votos.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1KNUXoyR_6XDSeUn-2zbOM8Sl0OQE3VAQ/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir pauta</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="radio">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Redação para Rádio</span>
-                                    <h3 class="card-title">Palavra do Especialista</h3>
-                                    <p class="card-description">Texto para programa da rádio abordando temas diversos.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1pPIWig8Z5R1U4SQU4bZxb7oRqpfNLClo/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir conteúdo</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="radio">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Redação para Rádio</span>
-                                    <h3 class="card-title">Boletins informativos</h3>
-                                    <p class="card-description">Conteúdo radiofônico destacando temas abordados por vereadores.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1vQiIe_3Mhyx9x1svetv8_92H_SfdIChz/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir boletins</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="radio">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="card-content">
-                                    <span class="card-category">Redação para Rádio</span>
-                                    <h3 class="card-title">Notas de serviço</h3>
-                                    <p class="card-description">Textos para programa de divulgação de eventos e serviços.</p>
-                                    <div class="card-actions">
-                                        <a href="https://drive.google.com/file/d/1T0qY6E5cYbk3Tqk0zQFell27J6rHi2VW/view?usp=drive_link" target="_blank" class="cta-button card-link">Conferir notas</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="boletins">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/zPVNmJKWg7s" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Boletim Informativo</span>
-                                    <h3 class="card-title">Vereador Junior Lokadora</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="boletins">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/t2h-2oVB5uc" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Boletim Informativo</span>
-                                    <h3 class="card-title">Vereador Pastor Bira</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="camara" data-secondary-category="boletins">
-                        <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/1x0rtL8FYZM" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Boletim Informativo</span>
-                                    <h3 class="card-title">Vereador Coronel Meira</h3>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card" data-primary-category="fai" data-secondary-category="entrevistas">
-                         <div class="card-inner">
-                            <div class="card-front">
-                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
-                                <div class="embed-container">
-                                    <iframe src="https://www.youtube.com/embed/Fed96UpI-_M" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
-                                <div class="card-content">
-                                    <span class="card-category">Entrevista | FAI</span>
-                                    <h3 class="card-title">Entrevista com Élida Ribeiro</h3>
-                                    <p class="card-description">Egressa da FAI representa São Paulo em um dos principais programas de formação de lideranças do agronegócio brasileiro</p>
-                                    <div class="card-actions">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-back">
-                                <h3>Comentário</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                                <button class="cta-button card-link flip-back-btn">Voltar</button>
-                            </div>
-                        </div>
-                    </div>
-                
-                </div>
-                </div>
-        </section>
-
-        <section id="sobre-mim" class="section">
-            <div class="container fade-in-section">
-                 <h2 class="section-title">Sobre Mim</h2>
-                 <div class="about-content">
-                         <img src="https://i.imgur.com/2EE5lJk.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
-                         <div class="about-text">
-                              <p>Formado pela Faculdade de Arquitetura, Artes, Comunicação e Design (FAAC) - Unesp Bauru.
-                                  Neste momento, atuo como jornalista no Centro Universitário de Adamantina.</p>
-                             <p>A minha trajetória profissional também inclui participação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
-                             <p>Sou apaixonado pelas potencialidades do jornalismo e tenho convicção de que a boa comunicação é a chave para uma sociedade melhor!</p>
-                             
-                             <p style="margin-top: 15px; font-weight: 700;">Possuo experiência com:</p>
-                             <ul class="experience-list">
-                                 <li>
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                     <span>Redação de pautas, matérias e roteiros</span>
-                                 </li>
-                                 <li>
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                     <span>Criação de conteúdo para web, rádio e TV</span>
-                                 </li>
-                                 <li>
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                     <span>Gravação de podcasts</span>
-                                 </li>
-                                 <li>
-                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                                     <span>Cobertura de eventos</span>
-                                 </li>
-                             </ul>
-
-                         </div>
-                 </div>
-            </div>
-        </section>
-
-        <section id="contato" class="section">
-            <div class="container fade-in-section">
-                <h2 class="section-title">Vamos marcar um café?</h2>
-                <div class="contact-info-grid">
-                    <div class="contact-item">
-                        <span>E-mail</span>
-                        <a href="mailto:guamaralitape@gmail.com">guamaralitape@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>Telefone</span>
-                        <a href="tel:+5515991258470">(15) 99125-8470</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>LinkedIn</span>
-                        <a href="https://www.linkedin.com/in/guamaralz/" target="_blank">/in/guamaralz</a>
-                    </div>
-                    <div class="contact-item">
-                        <span>Medium</span>
-                        <a href="https://medium.com/@guamaralz" target="_blank">@guamaralz</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>© 2025 Gustavo Amaral. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <script>
-        // --- SCRIPT PARA MENU MOBILE ---
-        const navToggle = document.querySelector('.nav-toggle');
-        const mainNav = document.querySelector('.main-nav');
-        navToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-
-        // --- [HELPER] VELOCIDADES DE DIGITAÇÃO ---
-        const heroTypingSpeed = 50; // Mais lento para a introdução (50ms)
-        const aboutTypingSpeed = 15; // Mais rápido para a biografia (15ms)
-
-        // --- [HELPER] FUNÇÃO DE DIGITAÇÃO REUTILIZÁVEL ---
-        function typeWriter(element, text, speed, index = 0, onComplete) {
-            if (index < text.length) {
-                if (!element.textNode) {
-                    element.textNode = document.createTextNode('');
-                    element.appendChild(element.textNode);
-                }
-                element.textNode.nodeValue += text.charAt(index);
-                setTimeout(() => typeWriter(element, text, speed, index + 1, onComplete), speed);
-            } else if (onComplete) {
-                onComplete();
-            }
-        }
-
-        // --- [GLOBAL] VARIAVEIS DA ANIMAÇÃO 'SOBRE MIM' ---
-        let aboutAnimationQueue = [];
-        const aboutOriginalContent = new Map();
-        let aboutTypingInProgress = false;
-
-        // --- [GLOBAL] FUNÇÃO DE ANIMAÇÃO 'SOBRE MIM' ---
-        function animateNextAbout() {
-            if (aboutAnimationQueue.length === 0) return; 
-            
-            const el = aboutAnimationQueue.shift(); 
-            const content = aboutOriginalContent.get(el);
-
-            if (!content) { 
-                animateNextAbout();
-                return;
-            }
-
-            el.style.minHeight = '0'; 
-
-            if (content.type === 'p') {
-                typeWriter(el, content.text, aboutTypingSpeed, 0, animateNextAbout); 
-            } else if (content.type === 'li') {
-                const span = el.querySelector('span');
-                const svg = el.querySelector('svg');
-                
-                if (svg) svg.style.opacity = '1'; 
-                
-                setTimeout(() => { 
-                    if (span) {
-                        typeWriter(span, content.text, aboutTypingSpeed, 0, animateNextAbout);
-                    } else {
-                        animateNextAbout(); 
-                    }
-                }, 100); 
-            }
-        }
-
-
-        // --- SCRIPT PRINCIPAL (DOM CARREGADO) ---
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // --- [INÍCIO] LÓGICA DE ANIMAÇÃO DO HERO ---
-            const heroSection = document.querySelector('#inicio');
-            const heroH1 = heroSection.querySelector('h1');
-            const heroP = heroSection.querySelector('p');
-            const heroCtaButton = heroSection.querySelector('.cta-button');
-
-            const heroAnimationQueue = [];
-            const heroOriginalContent = new Map();
-
-            if (heroH1) {
-                heroOriginalContent.set(heroH1, heroH1.textContent);
-                heroH1.style.minHeight = `${Math.max(heroH1.getBoundingClientRect().height, 26)}px`;
-                heroH1.textContent = '';
-                heroAnimationQueue.push(heroH1);
-            }
-            if (heroP) {
-                heroOriginalContent.set(heroP, heroP.textContent);
-                heroP.style.minHeight = `${Math.max(heroP.getBoundingClientRect().height, 26)}px`;
-                heroP.textContent = '';
-                heroAnimationQueue.push(heroP);
-            }
-            if (heroCtaButton) {
-                heroCtaButton.style.opacity = '0';
-                heroCtaButton.style.transform = 'translateY(10px)';
-                heroCtaButton.style.transition = 'opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s';
-            }
-
-            function animateHero() {
-                if (heroAnimationQueue.length === 0) {
-                    if (heroCtaButton) {
-                        heroCtaButton.style.opacity = '1';
-                        heroCtaButton.style.transform = 'translateY(0)';
-                    }
-                    return;
-                }
-                
-                const el = heroAnimationQueue.shift();
-                const text = heroOriginalContent.get(el);
-                
-                el.style.minHeight = '0'; 
-                typeWriter(el, text, heroTypingSpeed, 0, animateHero); 
-            }
-            
-            setTimeout(animateHero, 200);
-            // --- [FIM] LÓGICA DE ANIMAÇÃO DO HERO ---
-
-
-            // --- SCRIPT PARA FILTRO DUPLO DO PORTFÓLIO ---
-            const primaryFiltersContainer = document.querySelector('.portfolio-filters');
-            const secondaryFiltersContainer = document.querySelector('.secondary-filters-container');
-            const projectCards = document.querySelectorAll('.project-card');
-            const tccDescription = document.getElementById('tcc-description');
-
-            let activePrimaryFilter = 'all';
-            let activeSecondaryFilter = 'all';
-
-            function updateSecondaryFilters(primaryFilter) {
-                secondaryFiltersContainer.querySelectorAll('[data-group]').forEach(group => {
-                    group.style.display = 'none';
-                });
-
-                if (primaryFilter !== 'all') {
-                    const activeGroup = secondaryFiltersContainer.querySelector(`[data-group="${primaryFilter}"]`);
-                    if (activeGroup) {
-                        activeGroup.style.display = 'flex';
-                        activeGroup.style.gap = '10px';
-                        activeGroup.style.flexWrap = 'wrap';
-                        activeGroup.style.justifyContent = 'center';
-
-                        if (activeGroup.querySelector('.active')) {
-                            activeGroup.querySelector('.active').classList.remove('active');
-                        }
-                        activeGroup.querySelector('.secondary-filter-btn').classList.add('active');
-                    }
-                }
-            }
-
-            function filterGrid() {
-                const showTccDesc = activePrimaryFilter === 'unesp' && activeSecondaryFilter === 'tcc';
-                tccDescription.style.display = showTccDesc ? 'block' : 'none';
-
-                const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all';
-                if (showsReels && typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
-                    window.instgrm.Embeds.process();
-                }
-
-                let delay = 0; 
-                projectCards.forEach(card => {
-                    const cardPrimary = card.dataset.primaryCategory;
-                    const cardSecondary = card.dataset.secondaryCategory;
-
-                    const primaryMatch = activePrimaryFilter === 'all' || cardPrimary === activePrimaryFilter;
-                    const secondaryMatch = activeSecondaryFilter === 'all' || cardSecondary === activeSecondaryFilter;
-
-                    card.style.display = 'none';
-                    card.classList.remove('visible');
-
-                    if (primaryMatch && secondaryMatch) {
-                        setTimeout(() => {
-                            card.style.display = 'flex';
-                            card.classList.add('visible');
-                        }, delay);
-                        delay += 30; // [CORREÇÃO] Atraso reduzido para 30ms
-                    }
-                });
-            }
-
-            primaryFiltersContainer.addEventListener('click', (e) => {
-                if (e.target.matches('.filter-btn')) {
-                    primaryFiltersContainer.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    
-                    activePrimaryFilter = e.target.dataset.primaryFilter;
-                    activeSecondaryFilter = 'all';
-
-                    updateSecondaryFilters(activePrimaryFilter);
-                    filterGrid();
-                }
-            });
-
-            secondaryFiltersContainer.addEventListener('click', (e) => {
-                if (e.target.matches('.secondary-filter-btn')) {
-                    const group = e.target.closest('[data-group]');
-                    if (group) {
-                        group.querySelector('.active').classList.remove('active');
-                        e.target.classList.add('active');
-
-                        activeSecondaryFilter = e.target.dataset.secondaryFilter;
-                        filterGrid();
-                    }
-                }
-            });
-
-            updateSecondaryFilters('all');
-            filterGrid();
-
-
-            // --- [INÍCIO] SCRIPT PARA VIRAR O CARD ---
-            const portfolioGrid = document.querySelector('.portfolio-grid');
-
-            if (portfolioGrid) {
-                portfolioGrid.addEventListener('click', function(e) {
-                    // [ALTERAÇÃO] Checa se o clique foi no botão de '+'
-                    const commentButton = e.target.closest('.card-flip-btn'); // <--- MUDANÇA AQUI
-                    if (commentButton) {
-                        const card = e.target.closest('.project-card');
-                        if (card) {
-                            card.classList.add('is-flipped');
-                        }
-                    }
-                    
-                    // Checa se o clique foi no botão de 'Voltar'
-                    const flipBackButton = e.target.closest('.flip-back-btn');
-                    if (flipBackButton) {
-                        const card = e.target.closest('.project-card');
-                        if (card) {
-                            card.classList.remove('is-flipped');
-                        }
-                    }
-                });
-            }
-            // --- [FIM] SCRIPT PARA VIRAR O CARD ---
-
-
-            // --- [INÍCIO] PREPARAÇÃO DA ANIMAÇÃO 'SOBRE MIM' ---
-            const aboutSection = document.querySelector('#sobre-mim');
-            const elementsToType = aboutSection.querySelectorAll('.about-text p, .about-text li');
-            
-            elementsToType.forEach(el => {
-                aboutAnimationQueue.push(el); 
-                if (el.tagName === 'LI') {
-                    const span = el.querySelector('span');
-                    if (span) {
-                        aboutOriginalContent.set(el, { type: 'li', text: span.textContent });
-                        el.innerHTML = `${el.querySelector('svg').outerHTML}<span></span>`;
-                        el.querySelector('svg').style.opacity = '0';
-                        el.style.minHeight = '26px';
-                    }
-                } else { // é <p>
-                    aboutOriginalContent.set(el, { type: 'p', text: el.textContent });
-                    const height = el.getBoundingClientRect().height;
-                    el.style.minHeight = `${Math.max(height, 26)}px`; 
-                    el.textContent = '';
-                }
-            });
-            // --- [FIM] PREPARAÇÃO 'SOBRE MIM' ---
-        });
-
-
-        // --- SCRIPT PARA ANIMAÇÃO AO ROLAR ('SOBRE MIM' E 'PORTFÓLIO') ---
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible'); 
-
-                    const parentSection = entry.target.closest('.section');
-                    if (parentSection && parentSection.id === 'sobre-mim' && !aboutTypingInProgress) {
-                        aboutTypingInProgress = true;
-                        setTimeout(animateNextAbout, 300); 
-                    }
-
-                    scrollObserver.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1 // [CORREÇÃO] Alterado de 0.3 para 0.1
-        });
-        
-        const elementsToFade = document.querySelectorAll('.fade-in-section');
-        elementsToFade.forEach(el => scrollObserver.observe(el));
-    </script>
-    <script async src="//www.instagram.com/embed.js"></script>
-</body>
-</html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo Amaral | Jornalista</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="description" content="Portfólio de Gustavo Amaral, jornalista formado pela Unesp, com trabalhos em rádio, TV e internet.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CONFIGURAções GLOBAIS E NOVA IDENTIDADE VISUAL --- */
+        :root {
+            --primary-color: #005f73;    /* Azul Petróleo */
+            --accent-color: #ee9b00;     /* Âmbar/Laranja */
+            --dark-color: #212529;       /* Cinza Quase Preto */
+            --text-color: #495057;       /* Cinza Médio */
+            --background-color: #FDFBF7; /* Branco Gelo */
+            --light-gray: #e9ecef;
+            --white: #ffffff;
+            --title-font: 'Poppins', sans-serif;
+            --body-font: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* --- ESTILO PARA O BLOCKQUOTE DO INSTAGRAM --- */
+        .instagram-media {
+            background: #FFF;
+            border: 0;
+            border-radius: 8px; /* Borda mais suave */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            margin: 1px auto !important;
+            max-width: 540px;
+            min-width: 326px;
+            padding: 0;
+            width: calc(100% - 2px);
+        }
+
+        /* --- ANIMAções --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER E NAVEGAÇÃO --- */
+        .main-header {
+            background-color: rgba(253, 251, 247, 0.9); /* Fundo com transparência */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--title-font);
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            font-family: var(--body-font);
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover { color: var(--primary-color); }
+        .main-nav a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        /* --- SEÇÃO HERO (INÍCIO) --- */
+        .hero {
+            text-align: center;
+            min-height: 100vh; /* Garante que ocupe pelo menos a tela inteira */
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            padding-top: 80px; 
+            padding-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-family: var(--title-font);
+            font-weight: 700;
+            font-size: 4rem; /* Maior para mais impacto */
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero h1 span {
+            color: var(--primary-color); /* Destaque no nome */
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            color: var(--text-color);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-family: var(--body-font);
+            font-weight: 500;
+            padding: 15px 35px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px; /* Botões arredondados */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 95, 115, 0.2);
+            cursor: pointer; /* Adicionado para botões não-link */
+        }
+        
+        .cta-button:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.25);
+        }
+        
+        .card-link { box-shadow: none; } 
+
+        /* --- SEÇÕES GERAIS --- */
+        .section { padding: 100px 0; }
+
+        .section-title {
+            font-family: var(--title-font);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        /* Linha decorativa para os títulos */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        #portfolio { background-color: var(--white); }
+        #contato { background-color: var(--background-color); }
+
+        /* --- PORTFÓLIO --- */
+        .portfolio-filters, .secondary-filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .secondary-filters-container {
+            margin-bottom: 50px;
+            min-height: 42px;
+        }
+
+        .filter-btn, .secondary-filter-btn {
+            font-family: var(--body-font);
+            font-weight: 500;
+            background-color: var(--white);
+            border: 1px solid var(--light-gray);
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active,
+        .secondary-filter-btn:hover, .secondary-filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .tcc-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 25px;
+            background-color: #f7f9fc;
+            border-left: 5px solid var(--accent-color);
+            animation: fadeIn 0.5s ease;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+
+        /* --- [INÍCIO] ESTILOS PARA O EFEITO DE VIRAR O CARD --- */
+        .project-card {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            display: flex; 
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            overflow: visible; 
+            opacity: 0;
+            perspective: 1500px;
+        }
+        
+        /* Card de TCC (sem flip) não precisa de perspectiva */
+        .project-card[data-secondary-category="tcc"] {
+            perspective: unset;
+            overflow: hidden; /* Volta ao original */
+            opacity: 0;
+            /* Readiciona estilos básicos que foram removidos */
+            background-color: var(--white);
+            border: 1px solid var(--light-gray);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 12px;
+        }
+
+        .project-card[data-secondary-category="tcc"]:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .project-card.visible {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        /* Impede o hover de levantar o card enquanto ele está virando */
+        .project-card:not(.is-flipped):not([data-secondary-category="tcc"]):hover {
+            transform: translateY(-8px);
+            box-shadow: none;
+        }
+
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            flex-grow: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card.is-flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            background-color: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card-front {
+            position: relative; 
+            flex-grow: 1; 
+        }
+
+        .card-back {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            height: 100%; 
+            transform: rotateY(180deg);
+
+            padding: 30px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--dark-color);
+        }
+
+        .project-card:hover .card-front,
+        .project-card:hover .card-back {
+             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-back h3 {
+            font-family: var(--title-font);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .card-back p {
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+        
+        .card-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: auto; /* Empurra para a base do card-content */
+        }
+        
+        /* [INÍCIO DA ALTERAÇÃO] Estilo do botão de virar o card */
+        .card-flip-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            width: 32px; /* Tamanho da bolinha */
+            height: 32px; /* Tamanho da bolinha */
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            font-size: 1.5rem; /* Tamanho do "+" */
+            font-weight: 700;
+            line-height: 1; /* Alinha o "+" verticalmente */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        .card-flip-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-color);
+        }
+        /* [FIM DA ALTERAÇÃO] --- */
+        
+
+        .card-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .card-category {
+            align-self: flex-start;
+            font-family: var(--body-font);
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-family: var(--title-font);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            line-height: 1.3;
+        }
+        
+        .card-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 25px;
+        }
+        
+        .embed-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%;
+            margin-bottom: 15px;
+        }
+        .embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* --- SEÇÃO SOBRE MIM --- */
+        .about-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+        }
+        
+        .about-photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(0, 95, 115, 0.2);
+        }
+        
+        .about-text {
+            flex-grow: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .experience-section { margin-top: 40px; }
+
+        .experience-title {
+            font-family: var(--title-font);
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+
+        .experience-list {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas */
+            gap: 15px;
+        }
+
+        .experience-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+        }
+
+        .experience-list svg {
+            width: 24px;
+            height: 24px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .experience-logos {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 25px;
+        }
+        .experience-logos img {
+            height: 40px; /* Ajuste a altura conforme necessário */
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .experience-logos img:hover {
+            opacity: 1;
+        }
+
+        /* --- SEÇÃO CONTATO E FOOTER --- */
+        #contato .container { text-align: center; }
+        
+        .contact-info-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-item a {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        .contact-item a:hover { color: var(--primary-color); }
+
+        .contact-item span {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .main-footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 992px) {
+            .experience-list { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .main-nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                display: none;
+      _Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+                    </div>
+                    <div data-group="fai" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
+                    </div>
+                </div>
+                
+                <div id="tcc-description" class="tcc-intro" style="display: none;">
+                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
+                    <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    
+                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
+                                <div class="card-content">
+                                    <span class="card-category">Matéria Institucional | FAI</span>
+                                    <h3 class="card-title">FAI adquire 2,6 mil novos mobiliários para as salas de aula</h3>
+                                    <p class="card-description">Investimento reforça o compromisso da instituição com o bem-estar dos estudantes</p>
+                                    <div class="card-actions">
+                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10035" target="_blank" class="cta-button card-link">Conferir</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Comentário</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+                                <button class="cta-button card-link flip-back-btn">Voltar</button>
+                            </div>
+                      _Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+                    </div>
+                    <div data-group="fai" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
+          _Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+                    </div>
+                    <div data-group="fai" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
+                    </div>
+                </div>
+                
+                <div id="tcc-description" class="tcc-intro" style="display: none;">
+                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
+                    <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
+end block 177
+                </div>
+
+                <div class="portfolio-grid">
+                    
+                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
+                                <div class="card-content">
+                                    <span class="card-category">Matéria Institucional | FAI</span>
+                                    <h3 class="card-title">FAI adquire 2,6 mil novos mobiliários para as salas de aula</h3>
+                                    <p class="card-description">Investimento reforça o compromisso da instituição com o bem-estar dos estudantes</p>
+                                    <div class="card-actions">
+                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10035" target="_blank" class="cta-button card-link">Conferir</a>
+                                    </div>
+                                </div>
+                    D-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+                    </div>
+                    <div data-group="fai" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
+                    </div>
+                </div>
+                
+                <div id="tcc-description" class="tcc-intro" style="display: none;">
+                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
+                    <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    
+                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
+                                <div class="card-content">
+                                    <span class="card-category">Matéria Institucional | FAI</span>
+                                    <h3 class="card-title">FAI adquire 2,6 mil novos mobiliários para as salas de aula</h3>
+                                    <p class="card-description">Investimento reforça o compromisso da instituição com o bem-estar dos estudantes</p>
+                                    <div class="card-actions">
+                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10035" target="_blank" class="cta-button card-link">Conferir</a>
+                                    </div>
+                                </div>
+                    á-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+á-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+á-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+April 2, 2024 at 12:47:04 PM PDT
+Câmara Municipal de Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+A-Bauru</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+Read 2 lines
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+S-Bauru</button>
+S-Bauru</button>
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+S-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+A-Bauru</button>
+                    <button class="filter-btn" data-primary-filter="fai">FAI</button>
+                </div>
+
+                <div class="secondary-filters-container">
+                    <div data-group="unesp" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tcc">TCC</button>
+                    </div>
+                    <div data-group="camara" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="tv">Pautas para TV</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="radio">Rádio</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="boletins">Boletins</button>
+                    </div>
+                    <div data-group="fai" style="display: none;">
+                        <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="materias">Matérias</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="reels">Reels</button>
+                        <button class="secondary-filter-btn" data-secondary-filter="entrevistas">Entrevistas</button>
+                    </div>
+                </div>
+                
+                <div id="tcc-description" class="tcc-intro" style="display: none;">
+                    <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
+                    <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
+                </div>
+
+                <div class="portfolio-grid">
+                    
+                    <div class="project-card" data-primary-category="fai" data-secondary-category="materias">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <button class="card-flip-btn" aria-label="Ver comentários">+</button>
+                                <div class="card-content">
+                                    <span class="card-category">Matéria Institucional | FAI</span>
+                                    <h3 class="card-title">FAI adquire 2,6 mil novos mobiliários para as salas de aula</h3>
+                                    <p class="card-description">Investimento reforça o compromisso da instituição com o bem-estar dos estudantes</p>
+                                    <div class="card-actions">
+                                        <a href="https://www.fai.com.br/novo-portal/blog/post/10035" target="_blank" class="cta-button card-link">Conferir</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Comentário</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
+                                <button class="cta-button card-link flip-back-btn">Voltar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                                    </div>
+                </div>
+        </section>
+
+        <section id="sobre-mim" class="section">
+            <div class="container fade-in-section">
+                 <h2 class="section-title">Sobre Mim</h2>
+                 <div class="about-content">
+                         <img src="https://i.imgur.com/2EE5lJk.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
+                         <div class="about-text">
+                              <p>Formado pela Faculdade de Arquitetura, Artes, Comunicação e Design (FAAC) - Unesp Bauru.
+                                  Neste momento, atuo como jornalista no Centro Universitário de Adamantina.</p>
+                             <p>A minha trajetória profissional também inclui participação na equipe de jornalistas da Câmara Municipal de Bauru e no time de Automação da agência de marketing 8D Hubify. Na faculdade, fui Diretor Comercial da empresa júnior de jornalismo da Unesp, a Jornal Jr., e Assessor de Mídias da Assessoria de Comunicação e Imprensa da FAAC.</p>
+                             <p>Sou apaixonado pelas potencialidades do jornalismo e tenho convicção de que a boa comunicação é a chave para uma sociedade melhor!</p>
+                             
+                             <p style="margin-top: 15px; font-weight: 700;">Possuo experiência com:</p>
+                             <ul class="experience-list">
+                                 <li>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                     <span>Redação de pautas, matérias e roteiros</span>
+                                 </li>
+                                 <li>
+April 2, 2024 at 12:47:04 PM PDT
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                     <span>Criação de conteúdo para web, rádio e TV</span>
+                                 </li>
+                                 <li>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                     <span>Gravação de podcasts</span>
+                                 </li>
+                                 <li>
+                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                     <span>Cobertura de eventos</span>
+                                 </li>
+                             </ul>
+
+                         </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section">
+            <div class="container fade-in-section">
+                <h2 class="section-title">Vamos marcar um café?</h2>
+                <div class="contact-info-grid">
+                    <div class="contact-item">
+                        <span>E-mail</span>
+                        <a href="mailto:guamaralitape@gmail.com">guamaralitape@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>Telefone</span>
+                        <a href="tel:+5515991258470">(15) 99125-8470</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>LinkedIn</span>
+                        <a href="https://www.linkedin.com/in/guamaralz/" target="_blank">/in/guamaralz</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>Medium</span>
+                        <a href="https://medium.com/@guamaralz" target="_blank">@guamaralz</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2025 Gustavo Amaral. Todos os direitos reservados.</p>
+        </div>
+    </footer>
