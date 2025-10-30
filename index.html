@@ -588,123 +588,33 @@
         }
 
         /* --- RESPONSIVIDADE --- */
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 992px) {
-            .experience-list { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 992px) {
+            .experience-list { grid-template-columns: 1fr; }
+        }
 
-        @media (max-width: 768px) {
-            .nav-toggle { display: block; }
-            .main-nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                flex-direction: column;
-                display: none;
-                border-bottom: 1px solid var(--light-gray);
-            }
-            .main-nav.active { display: flex; }
-            .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
-            .main-nav li { width: 100%; }
-            .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
-            .main-nav a:hover::after { display: none; } /* Esconde efeito hover em mobile */
-            
-            /* --- [INÍCIO] AJUSTES MOBILE ADICIONAIS --- */
-            
-            /* Ajustes de espaçamento e fonte no Hero */
-            .hero h1 { font-size: 2.5rem; } /* MODIFICADO - Reduzindo um pouco mais */
-            .hero p { font-size: 1.1rem; } /* ADICIONADO */
-            .cta-button { padding: 12px 28px; font-size: 0.9rem; } /* ADICIONADO - Menor padding nos botões */
-
-            /* Ajustes de espaçamento da seção */
-            .section { padding: 60px 0; } /* ADICIONADO */
-            .section-title { 
-                font-size: 2rem; /* MODIFICADO */
-                margin-bottom: 40px; /* ADICIONADO */
-            }
-            .section-title::after { 
-                width: 60px; 
-                height: 3px; 
-                bottom: -10px; 
-            } /* ADICIONADO */
-
-            /* --- Ajustes Específicos do Portfólio (Mobile) --- */
-            
-            /* Força o grid do portfólio para 1 coluna */
-            .portfolio-grid {
-                grid-template-columns: 1fr; /* [PRINCIPAL] Garante 1 coluna */
-                gap: 30px; /* Reduz o espaço entre os cards */
-            }
-            
-            /* Diminui os botões de filtro */
-            .portfolio-filters, .secondary-filters-container {
-                gap: 10px; /* Menor espaço entre botões */
-            }
-            .filter-btn, .secondary-filter-btn {
-                padding: 8px 18px;
-                font-size: 0.9rem;
-            }
-            .secondary-filters-container {
-                margin-bottom: 30px; /* Reduz espaço antes do grid */
-            }
-
-            /* Ajusta o padding interno dos cards */
-            .card-content {
-                padding: 20px;
-            }
-            .card-title {
-                font-size: 1.3rem; /* Título do card menor */
-            }
-            .card-description {
-                font-size: 0.9rem; /* Descrição do card menor */
-                margin-bottom: 20px;
-            }
-            
-            /* Ajusta o padding do verso do card */
-            .card-back {
-                padding: 20px;
-            }
-            .card-back h3 {
-                font-size: 1.2rem;
-            }
-            .card-back p {
-                font-size: 1rem;
-                margin-bottom: 20px;
-            }
-
-            /* Reposiciona o botão de flip */
-            .card-flip-btn {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            /* Ajustes no TCC Intro */
-            .tcc-intro {
-                padding: 20px;
-                margin-bottom: 30px;
-            }
-
-            /* Ajustes "Sobre Mim" */
-            .about-content { flex-direction: column; text-align: center; align-items: center; }
-            .about-photo { width: 200px; height: 200px; }
-            .about-text p { font-size: 1rem; }
-            .experience-list li { font-size: 1rem; }
-            .experience-logos { justify-content: center; }
-
-            /* Ajustes "Contato" */
-            .contact-info-grid {
-                gap: 25px; /* Menor espaço entre itens de contato */
-            }
-            .contact-item a {
-                font-size: 1rem; /* Fonte menor para links */
-            }
-            .contact-item span {
-                font-size: 0.8rem; /* Fonte menor para labels */
-            }
-            /* --- [FIM] AJUSTES MOBILE ADICIONAIS --- */
-        }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .main-nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                display: none;
+                border-bottom: 1px solid var(--light-gray);
+            }
+            .main-nav.active { display: flex; }
+            .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
+            .main-nav li { width: 100%; }
+            .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
+            .main-nav a:hover::after { display: none; } /* Esconde efeito hover em mobile */
+            .hero h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .about-content { flex-direction: column; text-align: center; align-items: center; }
+            .about-photo { width: 200px; height: 200px; }
+            .experience-logos { justify-content: center; }
+        }
     </style>
 </head>
 <body>
