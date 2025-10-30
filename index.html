@@ -821,7 +821,7 @@
         </div>
     </footer>
 
-    <script>
+<script>
         // --- SCRIPT PARA MENU MOBILE ---
         const navToggle = document.querySelector('.nav-toggle');
         const mainNav = document.querySelector('.main-nav');
@@ -934,17 +934,103 @@
             filterGrid();
         });
 
+        // --- [INÍCIO] LÓGICA DE ANIMAÇÃO DE DIGITAÇÃO 'SOBRE MIM' ---
+            
+        // 1. Selecionar os elementos-alvo
+        const aboutSection = document.querySelector('#sobre-mim');
+        const elementsToType = aboutSection.querySelectorAll('.about-text p, .about-text li');
+        
+        // 2. Armazenar o conteúdo original e preparar elementos
+        const originalContent = new Map();
+        
+        elementsToType.forEach(el => {
+            if (el.tagName === 'LI') {
+                const span = el.querySelector('span');
+                if (span) {
+                    originalContent.set(el, { type: 'li', text: span.textContent });
+                    span.textContent = ''; // Limpa o span
+                    el.style.opacity = '0'; // Esconde o LI (incluindo SVG)
+                    el.style.transition = 'opacity 0.3s ease';
+                    el.style.minHeight = '26px'; // Mantém o espaço (aprox. altura da linha)
+                }
+            } else { // é <p>
+                originalContent.set(el, { type: 'p', text: el.textContent });
+                // Define uma altura mínima para evitar "pulo" no layout
+                const height = el.getBoundingClientRect().height;
+                el.style.minHeight = `${height}px`; 
+                el.textContent = ''; // Limpa o <p>
+            }
+        });
 
-        // --- SCRIPT PARA ANIMAÇÃO AO ROLAR ---
+        // 3. Função de digitação
+        const typingSpeed = 15; // Velocidade em ms (15ms é mais rápido que a leitura)
+        
+        function typeWriter(element, text, index = 0, onComplete) {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                setTimeout(() => typeWriter(element, text, index + 1, onComplete), typingSpeed);
+            } else if (onComplete) {
+                onComplete(); // Chama a próxima animação
+            }
+        }
+
+        // 4. Função para animar em sequência
+        let animationQueue = Array.from(elementsToType);
+        let typingInProgress = false; // Flag para rodar só uma vez
+
+        function animateNext() {
+            if (animationQueue.length === 0) return; // Fim
+            
+            const el = animationQueue.shift(); // Pega o próximo da fila
+            const content = originalContent.get(el);
+
+            if (!content) { // Segurança
+                animateNext();
+                return;
+            }
+
+            // Remove a altura mínima antes de animar
+            el.style.minHeight = '0';
+
+            if (content.type === 'p') {
+                typeWriter(el, content.text, 0, animateNext); // Digita no <p>
+            } else if (content.type === 'li') {
+                const span = el.querySelector('span');
+                el.style.opacity = '1'; // Mostra o LI (SVG aparece)
+                
+                // Pequeno delay para o SVG ser visível antes da digitação
+                setTimeout(() => {
+                    if (span) {
+                        typeWriter(span, content.text, 0, animateNext); // Digita no <span>
+                    } else {
+                        animateNext(); // Pula se não houver span
+                    }
+                }, 100); 
+            }
+        }
+        // --- [FIM] LÓGICA DE ANIMAÇÃO DE DIGITAÇÃO ---
+
+
+        // --- SCRIPT PARA ANIMAÇÃO AO ROLAR (MODIFICADO) ---
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+                    entry.target.classList.add('is-visible'); // Ativa o fade-in
+
+                    // --- MODIFICAÇÃO PARA ATIVAR A DIGITAÇÃO ---
+                    if (entry.target.id === 'sobre-mim' && !typingInProgress) {
+                        typingInProgress = true;
+                        // Atrasar o início da digitação para sincronizar com o fade-in
+                        // O fade-in dura 600ms, começamos a digitação um pouco depois
+                        setTimeout(animateNext, 300); 
+                    }
+                    // --- FIM DA MODIFICAÇÃO ---
+
                     scrollObserver.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.1
+            threshold: 0.2 // Inicia quando 20% da seção está visível
         });
 
         const elementsToFade = document.querySelectorAll('.fade-in-section');
