@@ -1434,10 +1434,10 @@
                     scrollObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.2 
+       }, {
+            threshold: 0.1 // [CORREÇÃO] Inicia quando 10% da seção está visível
         });
-
+        
         const elementsToFade = document.querySelectorAll('.fade-in-section');
         elementsToFade.forEach(el => scrollObserver.observe(el));
     </script>
