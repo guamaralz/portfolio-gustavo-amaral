@@ -203,7 +203,6 @@
             box-shadow: 0 8px 20px rgba(0, 95, 115, 0.25);
         }
         
-        /* [CORREÇÃO] Removida a regra 'align-self' que estava em conflito */
         .card-link { box-shadow: none; } 
 
         /* --- SEÇÕES GERAIS --- */
@@ -319,10 +318,12 @@
             animation: fadeIn 0.5s ease forwards;
         }
         
-        .project-card:hover {
+        /* Impede o hover de levantar o card enquanto ele está virando */
+        .project-card:not(.is-flipped):not([data-secondary-category="tcc"]):hover {
             transform: translateY(-8px);
             box-shadow: none;
         }
+
 
         .card-inner {
             position: relative;
@@ -390,13 +391,21 @@
             margin-bottom: 25px;
         }
         
+        /* [CORREÇÃO] Alinhamento dos botões */
         .card-actions {
             display: flex;
+            flex-direction: row; /* Garante o alinhamento lado a lado */
+            align-items: center; /* Alinha os botões verticalmente */
             gap: 10px;
             flex-wrap: wrap;
             margin-top: auto; /* Empurra para a base do card-content */
         }
         
+        /* [NOVO] Centraliza o botão se for o único no card-actions */
+        .card-actions:has(button.comment-btn:first-child:last-child) {
+            justify-content: center;
+        }
+
         .comment-btn {
             background-color: var(--accent-color);
             border-color: var(--accent-color);
@@ -1316,7 +1325,7 @@
                     window.instgrm.Embeds.process();
                 }
 
-                let delay = 0; // [CORREÇÃO] Otimização do delay
+                let delay = 0; 
                 projectCards.forEach(card => {
                     const cardPrimary = card.dataset.primaryCategory;
                     const cardSecondary = card.dataset.secondaryCategory;
@@ -1332,7 +1341,7 @@
                             card.style.display = 'flex';
                             card.classList.add('visible');
                         }, delay);
-                        delay += 100; // [CORREÇÃO] 
+                        delay += 100; // [CORREÇÃO] Atraso reduzido para 100ms
                     }
                 });
             }
@@ -1419,7 +1428,7 @@
         });
 
 
-        // --- SCRIPT PARA ANIMAÇÃO AO ROLAR ('SOBRE MIM') ---
+        // --- SCRIPT PARA ANIMAÇÃO AO ROLAR ('SOBRE MIM' E 'PORTFÓLIO') ---
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1434,8 +1443,8 @@
                     scrollObserver.unobserve(entry.target);
                 }
             });
-       }, {
-            threshold: 0.3 // [CORREÇÃO] Inicia quando 30% da seção está visível
+        }, {
+            threshold: 0.1 // [CORREÇÃO] Alterado de 0.3 para 0.1
         });
         
         const elementsToFade = document.querySelectorAll('.fade-in-section');
