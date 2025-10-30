@@ -1248,6 +1248,68 @@
             }
         }
 
+        // --- [MODIFICADO] LÓGICA DO PORTFÓLIO MOVIDA PARA O ESCOPO GLOBAL ---
+        let primaryFiltersContainer, secondaryFiltersContainer, projectCards, tccDescription;
+        let activePrimaryFilter = 'all';
+        let activeSecondaryFilter = 'all';
+        let portfolioAnimated = false; // Flag para rodar a animação só uma vez
+
+        function updateSecondaryFilters(primaryFilter) {
+            if (!secondaryFiltersContainer) return; // Checagem de segurança
+            secondaryFiltersContainer.querySelectorAll('[data-group]').forEach(group => {
+                group.style.display = 'none';
+            });
+
+            if (primaryFilter !== 'all') {
+                const activeGroup = secondaryFiltersContainer.querySelector(`[data-group="${primaryFilter}"]`);
+                if (activeGroup) {
+                    activeGroup.style.display = 'flex';
+                    activeGroup.style.gap = '10px';
+                    activeGroup.style.flexWrap = 'wrap';
+                    activeGroup.style.justifyContent = 'center';
+
+                    if (activeGroup.querySelector('.active')) {
+                        activeGroup.querySelector('.active').classList.remove('active');
+                    }
+                    activeGroup.querySelector('.secondary-filter-btn').classList.add('active');
+                }
+            }
+        }
+
+        function filterGrid() {
+            // Checagem de segurança para garantir que o DOM carregou
+            if (!tccDescription || !projectCards) return; 
+
+            const showTccDesc = activePrimaryFilter === 'unesp' && activeSecondaryFilter === 'tcc';
+            tccDescription.style.display = showTccDesc ? 'block' : 'none';
+
+            const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all';
+            if (showsReels && typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
+                window.instgrm.Embeds.process();
+            }
+
+            let delay = 0; 
+            projectCards.forEach(card => {
+                const cardPrimary = card.dataset.primaryCategory;
+                const cardSecondary = card.dataset.secondaryCategory;
+
+                const primaryMatch = activePrimaryFilter === 'all' || cardPrimary === activePrimaryFilter;
+                const secondaryMatch = activeSecondaryFilter === 'all' || cardSecondary === activeSecondaryFilter;
+
+                card.style.display = 'none';
+                card.classList.remove('visible');
+
+                if (primaryMatch && secondaryMatch) {
+                    setTimeout(() => {
+                        card.style.display = 'flex';
+                        card.classList.add('visible');
+                    }, delay);
+                    delay += 30;
+                }
+            });
+        }
+        // --- [FIM DA MODIFICAÇÃO] ---
+
 
         // --- SCRIPT PRINCIPAL (DOM CARREGADO) ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -1300,65 +1362,14 @@
 
 
             // --- SCRIPT PARA FILTRO DUPLO DO PORTFÓLIO ---
-            const primaryFiltersContainer = document.querySelector('.portfolio-filters');
-            const secondaryFiltersContainer = document.querySelector('.secondary-filters-container');
-            const projectCards = document.querySelectorAll('.project-card');
-            const tccDescription = document.getElementById('tcc-description');
+            
+            // [MODIFICADO] Apenas atribui as variáveis globais
+            primaryFiltersContainer = document.querySelector('.portfolio-filters');
+            secondaryFiltersContainer = document.querySelector('.secondary-filters-container');
+            projectCards = document.querySelectorAll('.project-card');
+            tccDescription = document.getElementById('tcc-description');
 
-            let activePrimaryFilter = 'all';
-            let activeSecondaryFilter = 'all';
-
-            function updateSecondaryFilters(primaryFilter) {
-                secondaryFiltersContainer.querySelectorAll('[data-group]').forEach(group => {
-                    group.style.display = 'none';
-                });
-
-                if (primaryFilter !== 'all') {
-                    const activeGroup = secondaryFiltersContainer.querySelector(`[data-group="${primaryFilter}"]`);
-                    if (activeGroup) {
-                        activeGroup.style.display = 'flex';
-                        activeGroup.style.gap = '10px';
-                        activeGroup.style.flexWrap = 'wrap';
-                        activeGroup.style.justifyContent = 'center';
-
-                        if (activeGroup.querySelector('.active')) {
-                            activeGroup.querySelector('.active').classList.remove('active');
-                        }
-                        activeGroup.querySelector('.secondary-filter-btn').classList.add('active');
-                    }
-                }
-            }
-
-            function filterGrid() {
-                const showTccDesc = activePrimaryFilter === 'unesp' && activeSecondaryFilter === 'tcc';
-                tccDescription.style.display = showTccDesc ? 'block' : 'none';
-
-                const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all';
-                if (showsReels && typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
-                    window.instgrm.Embeds.process();
-                }
-
-                let delay = 0; 
-                projectCards.forEach(card => {
-                    const cardPrimary = card.dataset.primaryCategory;
-                    const cardSecondary = card.dataset.secondaryCategory;
-
-                    const primaryMatch = activePrimaryFilter === 'all' || cardPrimary === activePrimaryFilter;
-                    const secondaryMatch = activeSecondaryFilter === 'all' || cardSecondary === activeSecondaryFilter;
-
-                    card.style.display = 'none';
-                    card.classList.remove('visible');
-
-                    if (primaryMatch && secondaryMatch) {
-                        setTimeout(() => {
-                            card.style.display = 'flex';
-                            card.classList.add('visible');
-                        }, delay);
-                        delay += 150; // [CORREÇÃO] Atraso reduzido para 150
-                    }
-                });
-            }
-
+            // Configura os listeners
             primaryFiltersContainer.addEventListener('click', (e) => {
                 if (e.target.matches('.filter-btn')) {
                     primaryFiltersContainer.querySelector('.active').classList.remove('active');
@@ -1386,7 +1397,7 @@
             });
 
             updateSecondaryFilters('all');
-            filterGrid();
+            // filterGrid(); // <--- [MODIFICADO] A CHAMADA INICIAL FOI REMOVIDA DAQUI
 
 
             // --- [INÍCIO] SCRIPT PARA VIRAR O CARD ---
@@ -1452,6 +1463,15 @@
                         aboutTypingInProgress = true;
                         setTimeout(animateNextAbout, 300); 
                     }
+                    
+                    // --- [MODIFICADO] CHAMA O filterGrid() AQUI ---
+                    // Isso garante que a animação dos cards só rode
+                    // quando a seção de portfólio estiver visível.
+                    if (parentSection && parentSection.id === 'portfolio' && !portfolioAnimated) {
+                        portfolioAnimated = true; // Marca como executado
+                        filterGrid(); // Chama a animação inicial dos cards
+                    }
+                    // --- [FIM DA MODIFICAÇÃO] ---
 
                     scrollObserver.unobserve(entry.target);
                 }
