@@ -152,14 +152,11 @@
 
         /* --- SEÇÃO HERO (INÍCIO) --- */
         .hero {
-            /* padding-top: 200px;  <-- REMOVIDO */
-            /* padding-bottom: 150px; <-- REMOVIDO */
             text-align: center;
             min-height: 100vh; /* Garante que ocupe pelo menos a tela inteira */
             display: flex;
             align-items: center; /* Centraliza verticalmente */
             justify-content: center; /* Centraliza horizontalmente */
-            /* Adiciona um padding para compensar o header fixo e dar um respiro */
             padding-top: 80px; 
             padding-bottom: 40px;
         }
@@ -289,18 +286,14 @@
 
         /* --- [INÍCIO] ESTILOS PARA O EFEITO DE VIRAR O CARD --- */
         .project-card {
-            /* Remove estilos, movidos para .card-front/back */
             background-color: transparent;
             border: none;
             box-shadow: none;
-            
-            display: flex; /* Mantém comportamento do grid */
+            display: flex; 
             flex-direction: column;
             transition: transform 0.3s ease;
             overflow: visible; /* Necessário para a perspectiva */
             opacity: 0;
-
-            /* Adiciona perspectiva para o 3D */
             perspective: 1500px;
         }
         
@@ -310,11 +303,11 @@
         
         .project-card:hover {
             transform: translateY(-8px);
-            box-shadow: none; /* Sombra é controlada no .card-front/back */
+            box-shadow: none;
         }
 
         .card-inner {
-            position: relative;
+            position: relative; /* Crucial para o .card-back absoluto */
             width: 100%;
             transition: transform 0.8s;
             transform-style: preserve-3d;
@@ -329,36 +322,47 @@
 
         .card-front,
         .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            
-            /* Estilos originais do .project-card movidos para cá */
+            /* Estilos visuais compartilhados (borda, sombra, etc.) */
             background-color: var(--white);
             border: 1px solid var(--light-gray);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+
             display: flex;
             flex-direction: column;
-            transition: box-shadow 0.3s ease; /* Adiciona transição p/ hover */
+            width: 100%;
+            transition: box-shadow 0.3s ease;
         }
 
-        /* Efeito hover na sombra, aplicado ao front/back */
-        .project-card:hover .card-front,
-        .project-card:hover .card-back {
-             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        /* [CORREÇÃO] A frente define a altura, o verso se adapta */
+        .card-front {
+            position: relative; /* Fica no fluxo e define a altura */
+            flex-grow: 1; /* Ocupa o espaço (para cards de altura igual) */
         }
 
         .card-back {
+            position: absolute; /* Sai do fluxo, fica por trás */
+            top: 0;
+            left: 0;
+            height: 100%; /* Ocupa 100% da altura do .card-inner (definida pelo front) */
             transform: rotateY(180deg);
+
+            /* Estilos do verso */
             padding: 30px;
             justify-content: center;
             align-items: center;
             text-align: center;
             color: var(--dark-color);
+        }
+        /* [FIM DA CORREÇÃO] */
+
+        .project-card:hover .card-front,
+        .project-card:hover .card-back {
+             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
 
         .card-back h3 {
@@ -372,15 +376,13 @@
             margin-bottom: 25px;
         }
         
-        /* Contêiner para os botões */
         .card-actions {
             display: flex;
-            gap: 10px; /* Espaçamento entre os botões */
-            flex-wrap: wrap; /* Para quebrar linha se não couber */
+            gap: 10px;
+            flex-wrap: wrap;
             margin-top: auto; /* Empurra para a base do card-content */
         }
         
-        /* Botão de comentário com a cor de destaque */
         .comment-btn {
             background-color: var(--accent-color);
             border-color: var(--accent-color);
@@ -1152,7 +1154,7 @@
                     </div>
                 
                 </div>
-            </div>
+                </div>
         </section>
 
         <section id="sobre-mim" class="section">
@@ -1235,10 +1237,8 @@
         const aboutTypingSpeed = 15; // Mais rápido para a biografia (15ms)
 
         // --- [HELPER] FUNÇÃO DE DIGITAÇÃO REUTILIZÁVEL ---
-        // Agora aceita 'speed' como um parâmetro
         function typeWriter(element, text, speed, index = 0, onComplete) {
             if (index < text.length) {
-                // Garante que o elemento seja tratado como nó de texto
                 if (!element.textNode) {
                     element.textNode = document.createTextNode('');
                     element.appendChild(element.textNode);
@@ -1246,7 +1246,7 @@
                 element.textNode.nodeValue += text.charAt(index);
                 setTimeout(() => typeWriter(element, text, speed, index + 1, onComplete), speed);
             } else if (onComplete) {
-                onComplete(); // Chama a próxima animação
+                onComplete();
             }
         }
 
@@ -1257,9 +1257,9 @@
 
         // --- [GLOBAL] FUNÇÃO DE ANIMAÇÃO 'SOBRE MIM' ---
         function animateNextAbout() {
-            if (aboutAnimationQueue.length === 0) return; // Fim
+            if (aboutAnimationQueue.length === 0) return; 
             
-            const el = aboutAnimationQueue.shift(); // Pega o próximo da fila
+            const el = aboutAnimationQueue.shift(); 
             const content = aboutOriginalContent.get(el);
 
             if (!content) { 
@@ -1267,23 +1267,21 @@
                 return;
             }
 
-            el.style.minHeight = '0'; // Remove a altura mínima
+            el.style.minHeight = '0'; 
 
             if (content.type === 'p') {
-                // Usa a velocidade 'aboutTypingSpeed'
                 typeWriter(el, content.text, aboutTypingSpeed, 0, animateNextAbout); 
             } else if (content.type === 'li') {
                 const span = el.querySelector('span');
                 const svg = el.querySelector('svg');
                 
-                if (svg) svg.style.opacity = '1'; // Mostra o SVG
+                if (svg) svg.style.opacity = '1'; 
                 
-                setTimeout(() => { // Pequeno delay para o SVG aparecer antes do texto
+                setTimeout(() => { 
                     if (span) {
-                        // Usa a velocidade 'aboutTypingSpeed'
                         typeWriter(span, content.text, aboutTypingSpeed, 0, animateNextAbout);
                     } else {
-                        animateNextAbout(); // Pula se não houver span
+                        animateNextAbout(); 
                     }
                 }, 100); 
             }
@@ -1302,31 +1300,26 @@
             const heroAnimationQueue = [];
             const heroOriginalContent = new Map();
 
-            // Preparar H1
             if (heroH1) {
                 heroOriginalContent.set(heroH1, heroH1.textContent);
                 heroH1.style.minHeight = `${Math.max(heroH1.getBoundingClientRect().height, 26)}px`;
                 heroH1.textContent = '';
                 heroAnimationQueue.push(heroH1);
             }
-            // Preparar P
             if (heroP) {
                 heroOriginalContent.set(heroP, heroP.textContent);
                 heroP.style.minHeight = `${Math.max(heroP.getBoundingClientRect().height, 26)}px`;
                 heroP.textContent = '';
                 heroAnimationQueue.push(heroP);
             }
-            // Preparar Botão CTA
             if (heroCtaButton) {
                 heroCtaButton.style.opacity = '0';
                 heroCtaButton.style.transform = 'translateY(10px)';
                 heroCtaButton.style.transition = 'opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s';
             }
 
-            // Função para animar a fila do Hero
             function animateHero() {
                 if (heroAnimationQueue.length === 0) {
-                    // Animação concluída, mostrar o botão
                     if (heroCtaButton) {
                         heroCtaButton.style.opacity = '1';
                         heroCtaButton.style.transform = 'translateY(0)';
@@ -1337,12 +1330,10 @@
                 const el = heroAnimationQueue.shift();
                 const text = heroOriginalContent.get(el);
                 
-                el.style.minHeight = '0'; // Remover altura mínima
-                // Usa a velocidade 'heroTypingSpeed'
+                el.style.minHeight = '0'; 
                 typeWriter(el, text, heroTypingSpeed, 0, animateHero); 
             }
             
-            // Iniciar a animação do Hero (com um pequeno delay)
             setTimeout(animateHero, 200);
             // --- [FIM] LÓGICA DE ANIMAÇÃO DO HERO ---
 
@@ -1440,23 +1431,27 @@
             // --- [INÍCIO] SCRIPT PARA VIRAR O CARD ---
             const portfolioGrid = document.querySelector('.portfolio-grid');
 
-            portfolioGrid.addEventListener('click', function(e) {
-                // Checa se o clique foi no botão de 'Comentários'
-                if (e.target.matches('.comment-btn')) {
-                    const card = e.target.closest('.project-card');
-                    if (card) {
-                        card.classList.add('is-flipped');
+            if (portfolioGrid) {
+                portfolioGrid.addEventListener('click', function(e) {
+                    // Checa se o clique foi no botão de 'Comentários'
+                    const commentButton = e.target.closest('.comment-btn');
+                    if (commentButton) {
+                        const card = e.target.closest('.project-card');
+                        if (card) {
+                            card.classList.add('is-flipped');
+                        }
                     }
-                }
-                
-                // Checa se o clique foi no botão de 'Voltar'
-                if (e.target.matches('.flip-back-btn')) {
-                    const card = e.target.closest('.project-card');
-                    if (card) {
-                        card.classList.remove('is-flipped');
+                    
+                    // Checa se o clique foi no botão de 'Voltar'
+                    const flipBackButton = e.target.closest('.flip-back-btn');
+                    if (flipBackButton) {
+                        const card = e.target.closest('.project-card');
+                        if (card) {
+                            card.classList.remove('is-flipped');
+                        }
                     }
-                }
-            });
+                });
+            }
             // --- [FIM] SCRIPT PARA VIRAR O CARD ---
 
 
@@ -1465,7 +1460,7 @@
             const elementsToType = aboutSection.querySelectorAll('.about-text p, .about-text li');
             
             elementsToType.forEach(el => {
-                aboutAnimationQueue.push(el); // Adiciona à fila global
+                aboutAnimationQueue.push(el); 
                 if (el.tagName === 'LI') {
                     const span = el.querySelector('span');
                     if (span) {
@@ -1489,19 +1484,19 @@
         const scrollObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible'); // Ativa o fade-in
+                    entry.target.classList.add('is-visible'); 
 
                     const parentSection = entry.target.closest('.section');
                     if (parentSection && parentSection.id === 'sobre-mim' && !aboutTypingInProgress) {
                         aboutTypingInProgress = true;
-                        setTimeout(animateNextAbout, 300); // Inicia a animação 'Sobre Mim'
+                        setTimeout(animateNextAbout, 300); 
                     }
 
                     scrollObserver.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.2 // Inicia quando 20% da seção está visível
+            threshold: 0.2 
         });
 
         const elementsToFade = document.querySelectorAll('.fade-in-section');
