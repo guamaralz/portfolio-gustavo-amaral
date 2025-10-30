@@ -934,6 +934,7 @@
             filterGrid();
         });
 
+
         // --- [INÍCIO] LÓGICA DE ANIMAÇÃO DE DIGITAÇÃO 'SOBRE MIM' ---
             
         // 1. Selecionar os elementos-alvo
@@ -947,17 +948,16 @@
             if (el.tagName === 'LI') {
                 const span = el.querySelector('span');
                 if (span) {
-                    originalContent.set(el, { type: 'li', text: span.textContent });
-                    span.textContent = ''; // Limpa o span
-                    el.style.opacity = '0'; // Esconde o LI (incluindo SVG)
-                    el.style.transition = 'opacity 0.3s ease';
-                    el.style.minHeight = '26px'; // Mantém o espaço (aprox. altura da linha)
+                    originalContent.set(el, { type: 'li', text: span.textContent, svg: el.querySelector('svg').outerHTML });
+                    // Limpa o LI, mas mantém o SVG para não ser "digitado"
+                    el.innerHTML = `${el.querySelector('svg').outerHTML}<span></span>`;
+                    el.querySelector('svg').style.opacity = '0'; // Esconde o SVG
+                    el.style.minHeight = '26px';
                 }
             } else { // é <p>
                 originalContent.set(el, { type: 'p', text: el.textContent });
-                // Define uma altura mínima para evitar "pulo" no layout
                 const height = el.getBoundingClientRect().height;
-                el.style.minHeight = `${height}px`; 
+                el.style.minHeight = `${Math.max(height, 26)}px`; 
                 el.textContent = ''; // Limpa o <p>
             }
         });
@@ -984,22 +984,22 @@
             const el = animationQueue.shift(); // Pega o próximo da fila
             const content = originalContent.get(el);
 
-            if (!content) { // Segurança
+            if (!content) { 
                 animateNext();
                 return;
             }
 
-            // Remove a altura mínima antes de animar
-            el.style.minHeight = '0';
+            el.style.minHeight = '0'; // Remove a altura mínima
 
             if (content.type === 'p') {
                 typeWriter(el, content.text, 0, animateNext); // Digita no <p>
             } else if (content.type === 'li') {
                 const span = el.querySelector('span');
-                el.style.opacity = '1'; // Mostra o LI (SVG aparece)
+                const svg = el.querySelector('svg');
                 
-                // Pequeno delay para o SVG ser visível antes da digitação
-                setTimeout(() => {
+                if (svg) svg.style.opacity = '1'; // Mostra o SVG
+                
+                setTimeout(() => { // Pequeno delay para o SVG aparecer antes do texto
                     if (span) {
                         typeWriter(span, content.text, 0, animateNext); // Digita no <span>
                     } else {
@@ -1017,14 +1017,17 @@
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible'); // Ativa o fade-in
 
-                    // --- MODIFICAÇÃO PARA ATIVAR A DIGITAÇÃO ---
-                    if (entry.target.id === 'sobre-mim' && !typingInProgress) {
+                    // --- CORREÇÃO DA LÓGICA ---
+                    // O 'entry.target' é o 'div.fade-in-section'.
+                    // Precisamos checar se o PAI dele é a seção 'sobre-mim'.
+                    const parentSection = entry.target.closest('.section');
+                    if (parentSection && parentSection.id === 'sobre-mim' && !typingInProgress) {
                         typingInProgress = true;
                         // Atrasar o início da digitação para sincronizar com o fade-in
                         // O fade-in dura 600ms, começamos a digitação um pouco depois
                         setTimeout(animateNext, 300); 
                     }
-                    // --- FIM DA MODIFICAÇÃO ---
+                    // --- FIM DA CORREÇÃO ---
 
                     scrollObserver.unobserve(entry.target);
                 }
