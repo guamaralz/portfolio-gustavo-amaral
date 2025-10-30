@@ -400,11 +400,6 @@
             flex-wrap: wrap;
             margin-top: auto; /* Empurra para a base do card-content */
         }
-        
-        /* [NOVO] Centraliza o botão se for o único no card-actions */
-        .card-actions:has(button.comment-btn:first-child:last-child) {
-            justify-content: center;
-        }
 
         .comment-btn {
             background-color: var(--accent-color);
@@ -1341,7 +1336,7 @@
                             card.style.display = 'flex';
                             card.classList.add('visible');
                         }, delay);
-                        delay += 100; // [CORREÇÃO] Atraso reduzido para 100ms
+                        delay += 150; // [CORREÇÃO] Atraso reduzido para 150ms
                     }
                 });
             }
@@ -1444,7 +1439,7 @@
                 }
             });
         }, {
-            threshold: 0.1 // [CORREÇÃO] Alterado de 0.3 para 0.1
+            threshold: 0.2 // [CORREÇÃO] Alterado de 0.1 para 0.2
         });
         
         const elementsToFade = document.querySelectorAll('.fade-in-section');
