@@ -152,9 +152,16 @@
 
         /* --- SEÇÃO HERO (INÍCIO) --- */
         .hero {
-            padding-top: 200px;
-            padding-bottom: 150px;
+            /* padding-top: 200px;  <-- REMOVIDO */
+            /* padding-bottom: 150px; <-- REMOVIDO */
             text-align: center;
+            min-height: 100vh; /* Garante que ocupe pelo menos a tela inteira */
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+            justify-content: center; /* Centraliza horizontalmente */
+            /* Adiciona um padding para compensar o header fixo e dar um respiro */
+            padding-top: 80px; 
+            padding-bottom: 40px;
         }
         
         .hero h1 {
@@ -829,9 +836,13 @@
             mainNav.classList.toggle('active');
         });
 
+        // --- [HELPER] VELOCIDADES DE DIGITAÇÃO ---
+        const heroTypingSpeed = 50; // Mais lento para a introdução (50ms)
+        const aboutTypingSpeed = 15; // Mais rápido para a biografia (15ms)
+
         // --- [HELPER] FUNÇÃO DE DIGITAÇÃO REUTILIZÁVEL ---
-        const typingSpeed = 15; // Velocidade em ms (15ms é mais rápido que a leitura)
-        function typeWriter(element, text, index = 0, onComplete) {
+        // Agora aceita 'speed' como um parâmetro
+        function typeWriter(element, text, speed, index = 0, onComplete) {
             if (index < text.length) {
                 // Garante que o elemento seja tratado como nó de texto
                 if (!element.textNode) {
@@ -839,7 +850,7 @@
                     element.appendChild(element.textNode);
                 }
                 element.textNode.nodeValue += text.charAt(index);
-                setTimeout(() => typeWriter(element, text, index + 1, onComplete), typingSpeed);
+                setTimeout(() => typeWriter(element, text, speed, index + 1, onComplete), speed);
             } else if (onComplete) {
                 onComplete(); // Chama a próxima animação
             }
@@ -865,7 +876,8 @@
             el.style.minHeight = '0'; // Remove a altura mínima
 
             if (content.type === 'p') {
-                typeWriter(el, content.text, 0, animateNextAbout); // Digita no <p>
+                // Usa a velocidade 'aboutTypingSpeed'
+                typeWriter(el, content.text, aboutTypingSpeed, 0, animateNextAbout); 
             } else if (content.type === 'li') {
                 const span = el.querySelector('span');
                 const svg = el.querySelector('svg');
@@ -874,8 +886,8 @@
                 
                 setTimeout(() => { // Pequeno delay para o SVG aparecer antes do texto
                     if (span) {
-                        // Passa o SPAN como elemento para o typeWriter
-                        typeWriter(span, content.text, 0, animateNextAbout);
+                        // Usa a velocidade 'aboutTypingSpeed'
+                        typeWriter(span, content.text, aboutTypingSpeed, 0, animateNextAbout);
                     } else {
                         animateNextAbout(); // Pula se não houver span
                     }
@@ -932,7 +944,8 @@
                 const text = heroOriginalContent.get(el);
                 
                 el.style.minHeight = '0'; // Remover altura mínima
-                typeWriter(el, text, 0, animateHero); // Chama o próximo da fila
+                // Usa a velocidade 'heroTypingSpeed'
+                typeWriter(el, text, heroTypingSpeed, 0, animateHero); 
             }
             
             // Iniciar a animação do Hero (com um pequeno delay)
