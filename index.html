@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gustavo Amaral | Jornalista</title>
 
-    <!-- Links de Favicon (mantidos como no original) -->
+    <!-- Links de Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -69,25 +69,26 @@
         }
 
         /* --- ANIMAções --- */
+        /* Animação de fade-in (usada apenas nos cards) */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         
-        .fade-in-section {
-            opacity: 0;
-            transition: opacity 0.6s ease-out;
-        }
-
-        .fade-in-section.is-visible {
-            opacity: 1;
-        }
+        /* * [CORREÇÃO V3 - INVISIBILIDADE]
+         * As classes .fade-in-section e .fade-in-section.is-visible
+         * foram REMOVIDAS. As seções agora são visíveis por padrão,
+         * eliminando o bug de renderização/opacity:0 no mobile.
+        */
 
         /* --- HEADER E NAVEGAÇÃO --- */
         .main-header {
-            background-color: rgba(253, 251, 247, 0.9); /* Fundo com transparência */
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+            /* * [CORREÇÃO V3 - INVISIBILIDADE]
+             * Removido 'backdrop-filter' e '-webkit-backdrop-filter'.
+             * Este efeito é uma causa conhecida de bugs de renderização
+             * em navegadores mobile (Safari/iOS).
+            */
+            background-color: rgba(253, 251, 247, 0.95); /* Fundo com transparência */
             border-bottom: 1px solid var(--light-gray);
             padding: 15px 0;
             position: fixed;
@@ -154,10 +155,10 @@
         /* --- SEÇÃO HERO (INÍCIO) --- */
         .hero {
             text-align: center;
-            min-height: 100vh;
+            min-height: 100vh; 
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; 
+            justify-content: center; 
             padding-top: 80px; 
             padding-bottom: 40px;
         }
@@ -172,7 +173,7 @@
         }
         
         .hero h1 span {
-            color: var(--primary-color);
+            color: var(--primary-color); 
         }
 
         .hero p {
@@ -244,7 +245,7 @@
         }
         .secondary-filters-container {
             margin-bottom: 50px;
-            min-height: 42px;
+            min-height: 42px; 
         }
 
         .filter-btn, .secondary-filter-btn {
@@ -297,31 +298,17 @@
             perspective: 1500px;
         }
         
-        /* * [CORREÇÃO REELS V3]
-         * Força os cards de reel a estarem visíveis (sem opacity: 0)
-         * desde o início. Mudar a opacidade de iframes quebra o play
-         * em navegadores mobile.
-        */
-        .project-card[data-secondary-category="reels"] {
-            opacity: 1;
-        }
-
         /* Cards que NÃO viram (TCC e Reels) */
         .project-card[data-secondary-category="tcc"],
         .project-card[data-secondary-category="reels"] {
             perspective: unset;
             overflow: hidden; 
-            /* opacity: 0; - Removido para os reels pela regra acima */
+            opacity: 0; /* Ainda começa invisível */
             background-color: var(--white);
             border: 1px solid var(--light-gray);
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-radius: 12px;
         }
-        /* Cards TCC ainda precisam do opacity: 0 inicial */
-        .project-card[data-secondary-category="tcc"] {
-            opacity: 0;
-        }
-
 
         .project-card[data-secondary-category="tcc"]:hover,
         .project-card[data-secondary-category="reels"]:hover {
@@ -334,9 +321,13 @@
             animation: fadeIn 0.5s ease forwards;
         }
         
-        /* Desativa a animação de fade-in para os Reels */
+        /* * [CORREÇÃO V2 - REELS MOBILE]
+         * Remove a animação de fade-in dos Reels para
+         * evitar que o navegador mobile pause o iframe.
+        */
         .project-card[data-secondary-category="reels"].visible {
             animation: none;
+            opacity: 1;
         }
         
         /* Efeito de "levantar" no hover (ignora TCC e Reels) */
@@ -344,6 +335,7 @@
             transform: translateY(-8px);
             box-shadow: none;
         }
+
 
         .card-inner {
             position: relative;
@@ -417,7 +409,7 @@
             align-items: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: auto;
+            margin-top: auto; 
         }
         
         .card-flip-btn {
@@ -482,7 +474,7 @@
             position: relative;
             width: 100%;
             overflow: hidden;
-            padding-top: 56.25%;
+            padding-top: 56.25%; 
             margin-bottom: 15px;
         }
         .embed-container iframe {
@@ -523,7 +515,7 @@
             list-style: none;
             padding-left: 0;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; 
             gap: 15px;
         }
 
@@ -584,12 +576,11 @@
         }
 
         @media (max-width: 768px) {
-            /* Desativa o blur do header no mobile (resolve bug de renderização) */
-            .main-header {
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                background-color: rgba(253, 251, 247, 0.95);
-            }
+            /* * [CORREÇÃO V3 - INVISIBILIDADE]
+             * A regra do header que removia o backdrop-filter
+             * foi movida para o topo da folha de estilos
+             * (na definição de .main-header) para simplificar.
+            */
 
             .nav-toggle { display: block; }
             .main-nav {
@@ -606,7 +597,7 @@
             .main-nav ul { flex-direction: column; width: 100%; text-align: center; gap: 0; }
             .main-nav li { width: 100%; }
             .main-nav a { display: block; padding: 15px; border-bottom: 1px solid var(--light-gray); }
-            .main-nav a:hover::after { display: none; }
+            .main-nav a:hover::after { display: none; } 
             
             .hero h1 { font-size: 2.8rem; }
             .section-title { font-size: 2.2rem; }
@@ -634,16 +625,19 @@
     </header>
 
     <main>
+        <!-- [CORREÇÃO V3] Removido 'class="fade-in-section"' -->
         <section id="inicio" class="hero">
-            <div class="container fade-in-section">
+            <!-- [CORREÇÃO V3] Removido 'class="fade-in-section"' -->
+            <div class="container">
                 <h1>Olá, seja bem-vindo(a)! </h1>
                 <p>Sou Gustavo Amaral, jornalista formado pela Unesp.</p>
                 <a href="#portfolio" class="cta-button">Conheça meus trabalhos</a>
             </div>
         </section>
 
+        <!-- [CORREÇÃO V3] Removido 'class="fade-in-section"' -->
         <section id="portfolio" class="section">
-            <div class="container fade-in-section">
+            <div class="container">
                 <h2 class="section-title">Portfólio</h2>
 
                 <div class="portfolio-filters">
@@ -881,7 +875,6 @@
                         </div>
                     </div>
 
-                    <!-- Cards Câmara (com flip) -->
                     <div class="project-card" data-primary-category="camara" data-secondary-category="tv">
                         <div class="card-inner">
                             <div class="card-front">
@@ -1102,8 +1095,9 @@
                 </div>
         </section>
 
+        <!-- [CORREÇÃO V3] Removido 'class="fade-in-section"' -->
         <section id="sobre-mim" class="section">
-            <div class="container fade-in-section">
+            <div class="container">
                  <h2 class="section-title">Sobre Mim</h2>
                  <div class="about-content">
                          <img src="https://i.imgur.com/2EE5lJk.jpeg" alt="Foto de Gustavo Amaral" class="about-photo">
@@ -1138,8 +1132,9 @@
             </div>
         </section>
 
+        <!-- [CORREÇÃO V3] Removido 'class="fade-in-section"' -->
         <section id="contato" class="section">
-            <div class="container fade-in-section">
+            <div class="container">
                 <h2 class="section-title">Vamos marcar um café?</h2>
                 <div class="contact-info-grid">
                     <div class="contact-item">
@@ -1229,7 +1224,9 @@
         let primaryFiltersContainer, secondaryFiltersContainer, projectCards, tccDescription;
         let activePrimaryFilter = 'all';
         let activeSecondaryFilter = 'all';
-        let portfolioAnimated = false;
+        let portfolioAnimated = false; 
+        let heroAnimated = false; // Flag para animação do Hero
+        let aboutAnimated = false; // Flag para animação "Sobre Mim"
 
         function updateSecondaryFilters(primaryFilter) {
             if (!secondaryFiltersContainer) return; 
@@ -1261,7 +1258,6 @@
 
             const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all';
             if (showsReels && typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
-                // Re-processa os embeds para que funcionem após o display:none
                 window.instgrm.Embeds.process();
             }
 
@@ -1277,18 +1273,11 @@
                 card.classList.remove('visible');
 
                 if (primaryMatch && secondaryMatch) {
-                    // Reels não participam da animação de delay (são opacidade 1)
-                    if (cardSecondary === 'reels') {
+                    setTimeout(() => {
                         card.style.display = 'flex';
-                        card.classList.add('visible'); // Adiciona a classe, mas o CSS ignora a animação
-                    } else {
-                        // Outros cards têm a animação normal
-                        setTimeout(() => {
-                            card.style.display = 'flex';
-                            card.classList.add('visible');
-                        }, delay);
-                        delay += 30;
-                    }
+                        card.classList.add('visible');
+                    }, delay);
+                    delay += 30; 
                 }
             });
         }
@@ -1300,13 +1289,14 @@
             // --- SCRIPT PARA MENU MOBILE ---
             const navToggle = document.querySelector('.nav-toggle');
             const mainNav = document.querySelector('.main-nav');
-            const navLinks = document.querySelectorAll('.main-nav a');
+            const navLinks = document.querySelectorAll('.main-nav a'); // Pega todos os links do menu
 
             navToggle.addEventListener('click', () => {
                 mainNav.classList.toggle('active');
             });
 
-            // [MELHORIA DE UX] Fecha o menu mobile ao clicar em um link
+            // * [NOVA MELHORIA V3]
+            // * Fecha o menu mobile ao clicar em um link
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (mainNav.classList.contains('active')) {
@@ -1315,7 +1305,7 @@
                 });
             });
 
-            // --- LÓGICA DE ANIMAÇÃO DO HERO ---
+            // --- LÓGICA DE ANIMAÇÃO DO HERO (TYPING) ---
             const heroSection = document.querySelector('#inicio');
             const heroH1 = heroSection.querySelector('h1');
             const heroP = heroSection.querySelector('p');
@@ -1358,7 +1348,7 @@
                 typeWriter(el, text, heroTypingSpeed, 0, animateHero); 
             }
             
-            setTimeout(animateHero, 200);
+            // A animação do Hero agora é disparada pelo Intersection Observer
 
             // --- CONFIGURAÇÃO DO FILTRO DE PORTFÓLIO ---
             primaryFiltersContainer = document.querySelector('.portfolio-filters');
@@ -1376,7 +1366,7 @@
                         activeSecondaryFilter = 'all'; 
 
                         updateSecondaryFilters(activePrimaryFilter);
-                        filterGrid();
+                        filterGrid(); 
                     }
                 });
             }
@@ -1390,13 +1380,14 @@
                             e.target.classList.add('active');
 
                             activeSecondaryFilter = e.target.dataset.secondaryFilter;
-                            filterGrid();
+                            filterGrid(); 
                         }
                     }
                 });
             }
 
             updateSecondaryFilters('all');
+            // A chamada inicial 'filterGrid()' foi movida para o Intersection Observer
 
             // --- SCRIPT PARA VIRAR O CARD ---
             const portfolioGrid = document.querySelector('.portfolio-grid');
@@ -1443,22 +1434,30 @@
             });
 
 
-            // --- OBSERVER DE ROLAGEM (PARA ANIMAÇÕES) ---
+            // --- [CORREÇÃO V3] OBSERVER DE ROLAGEM ---
+            // O observer agora observa as seções e dispara
+            // as animações internas (typing, cards) uma única vez.
+            
             const scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible'); 
-
-                        const parentSection = entry.target.closest('section');
-                        if (!parentSection) return;
+                        const sectionId = entry.target.id;
                         
-                        if (parentSection.id === 'sobre-mim' && !aboutTypingInProgress) {
-                            aboutTypingInProgress = true;
+                        // Gatilho para "Hero" (Typing)
+                        if (sectionId === 'inicio' && !heroAnimated) {
+                            heroAnimated = true;
+                            setTimeout(animateHero, 200); 
+                        }
+                        
+                        // Gatilho para "Sobre Mim" (Typing)
+                        if (sectionId === 'sobre-mim' && !aboutAnimated) {
+                            aboutAnimated = true;
                             setTimeout(animateNextAbout, 300); 
                         }
                         
-                        if (parentSection.id === 'portfolio' && !portfolioAnimated) {
-                            portfolioAnimated = true;
+                        // Gatilho para "Portfólio" (Animação dos Cards)
+                        if (sectionId === 'portfolio' && !portfolioAnimated) {
+                            portfolioAnimated = true; 
                             filterGrid(); // Chama a animação dos cards PELA PRIMEIRA VEZ
                         }
 
@@ -1466,13 +1465,16 @@
                     }
                 });
             }, {
-                threshold: 0.1
+                threshold: 0.1 // 10% do elemento visível
             });
             
-            const elementsToFade = document.querySelectorAll('.fade-in-section');
-            elementsToFade.forEach(el => scrollObserver.observe(el));
+            // Inicia o observer para cada seção principal
+            document.querySelectorAll('section.section, section.hero').forEach(section => {
+                scrollObserver.observe(section);
+            });
         });
    </script>
+   <!-- Script do Instagram, essencial para os Reels -->
    <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
