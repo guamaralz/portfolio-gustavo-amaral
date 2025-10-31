@@ -69,6 +69,11 @@
         }
 
         /* --- ANIMAções (Apenas para Hero, Sobre, Contato) --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         .fade-in-section {
             opacity: 0;
             transition: opacity 0.6s ease-out;
@@ -269,7 +274,6 @@
             background-color: #f7f9fc;
             border-left: 5px solid var(--accent-color);
             border-radius: 0 8px 8px 0;
-            /* Animação removida */
         }
 
         .portfolio-grid {
@@ -284,36 +288,49 @@
             background-color: transparent;
             border: none;
             box-shadow: none;
-            display: flex; /* Alterado de 'none' para 'flex' no JS */
+            display: flex; 
             flex-direction: column;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease; /* Transição para o 'lift' do hover */
             overflow: visible; 
-            /* opacity: 0; REMOVIDO */
-            perspective: 1500px;
+            perspective: 1500px; /* Ativa o espaço 3D para o flip */
+            /* opacity: 0; foi removido, JS controla o display */
         }
         
         /* Cards que NÃO viram (TCC e Reels) */
         .project-card[data-secondary-category="tcc"],
         .project-card[data-secondary-category="reels"] {
-            perspective: unset;
+            perspective: unset; /* Desativa 3D para estes */
             overflow: hidden; 
             background-color: var(--white);
             border: 1px solid var(--light-gray);
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             border-radius: 12px;
-            /* opacity: 0; REMOVIDO */
         }
 
-        .project-card[data-secondary-category="tcc"]:hover,
-        .project-card[data-secondary-category="reels"]:hover {
+        /* Hover lift para TCC (mas não para Reels) */
+        .project-card[data-secondary-category="tcc"]:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 25px rgba(0,0,0,0.1);
         }
         
-        /* Efeito de "levantar" no hover (ignora TCC e Reels) */
+        /* * [CORREÇÃO REELS V6]
+         * Remove TODAS as transformações e transições do card de Reel
+         * para previnir o bug de "congelamento" do iframe no mobile.
+        */
+        .project-card[data-secondary-category="reels"] {
+            perspective: none; /* Garante que não há 3D */
+            transition: none;  /* Remove qualquer transição */
+        }
+        /* Desativa o efeito de hover/lift para os reels */
+        .project-card[data-secondary-category="reels"]:hover {
+            transform: none; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Mantém a sombra original */
+        }
+
+        /* Efeito de "levantar" no hover (Apenas para cards que viram) */
         .project-card:not(.is-flipped):not([data-secondary-category="tcc"]):not([data-secondary-category="reels"]):hover {
             transform: translateY(-8px);
-            box-shadow: none;
+            box-shadow: none; /* Sombra já está no card-front/back */
         }
 
         .card-inner {
@@ -416,7 +433,6 @@
             background-color: var(--primary-color);
         }
         
-
         .card-content {
             padding: 30px;
             display: flex;
@@ -614,7 +630,6 @@
         </section>
 
         <section id="portfolio" class="section">
-            <!-- Classe .fade-in-section REMOVIDA daqui -->
             <div class="container">
                 <h2 class="section-title">Portfólio</h2>
 
@@ -715,7 +730,7 @@
                         </div>
                     </div>
 
-                    <!-- Card de Reel (sem flip) -->
+                    <!-- Card de Reel (sem flip, sem 3D, sem transição) -->
                     <div class="project-card" data-primary-category="fai" data-secondary-category="reels">
                         <div class="card-inner">
                             <div class="card-front">
@@ -1163,7 +1178,6 @@
         let primaryFiltersContainer, secondaryFiltersContainer, projectCards, tccDescription;
         let activePrimaryFilter = 'all';
         let activeSecondaryFilter = 'all';
-        // 'portfolioAnimated' não é mais necessária para o grid
 
         function updateSecondaryFilters(primaryFilter) {
             if (!secondaryFiltersContainer) return; 
@@ -1196,6 +1210,7 @@
 
             const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all';
             if (showsReels && typeof window.instgrm !== 'undefined' && window.instgrm.Embeds) {
+                // Processa os embeds do Instagram DEPOIS de exibi-los
                 window.instgrm.Embeds.process();
             }
 
@@ -1206,14 +1221,11 @@
                 const primaryMatch = activePrimaryFilter === 'all' || cardPrimary === activePrimaryFilter;
                 const secondaryMatch = activeSecondaryFilter === 'all' || cardSecondary === activeSecondaryFilter;
 
-                // Lógica síncrona: simplesmente mostra ou esconde
                 if (primaryMatch && secondaryMatch) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
-                // Remove classes de animação (limpeza)
-                card.classList.remove('visible'); 
             });
         }
 
@@ -1321,8 +1333,7 @@
             }
 
             updateSecondaryFilters('all');
-            // CHAMA A FUNÇÃO IMEDIATAMENTE PARA MOSTRAR OS CARDS
-            filterGrid(); 
+            filterGrid(); // Chama a função imediatamente
 
             // --- SCRIPT PARA VIRAR O CARD ---
             const portfolioGrid = document.querySelector('.portfolio-grid');
@@ -1351,15 +1362,13 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible'); 
-                        // Lógica do 'portfolio' foi REMOVIDA daqui
                         scrollObserver.unobserve(entry.target);
                     }
                 });
             }, {
-                threshold: 0.1 // 10% do elemento visível
+                threshold: 0.1 
             });
             
-            // Inicia o observer
             const elementsToFade = document.querySelectorAll('.fade-in-section');
             elementsToFade.forEach(el => scrollObserver.observe(el));
         });
