@@ -716,10 +716,6 @@
                     <p>Conferir todos os conteúdos pelo IMPACTO: <a href="https://www.impactonoticias.com.br/author/gu/" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://www.impactonoticias.com.br/author/gu/</a></p>
                 </div>
 
-                <div id="fai-description" class="tcc-intro" style="display: none;">
-                    <p>Conferir todos os conteúdos pela FAI: <a href="https://docs.google.com/spreadsheets/d/13CjxLtNEzIrCUqegDu7N8EdjPsd5z_IqTusL967yO0g/edit?usp=sharing" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://docs.google.com/spreadsheets/d/13CjxLtNEzIrCUqegDu7N8EdjPsd5z_IqTusL967yO0g/edit?usp=sharing</a></p>
-                </div>
-
                 <div class="portfolio-grid">
 
                     <!-- ============================================== -->
@@ -1406,12 +1402,6 @@
             const showImpactoDesc = activePrimaryFilter === 'impacto' && activeSecondaryFilter === 'materias';
             if (impactoDescription) {
                  impactoDescription.style.display = showImpactoDesc ? 'block' : 'none';
-            }
-
-            // Lógica para FAI
-            const showFAIDesc = activePrimaryFilter === 'fai' && activeSecondaryFilter === 'materias';
-            if (faiDescription) {
-                 faiDescription.style.display = showfaiDesc ? 'block' : 'none';
             }
             
             const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all' || (activePrimaryFilter === 'impacto' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels'));
