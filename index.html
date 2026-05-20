@@ -282,7 +282,6 @@
             gap: 40px;
         }
 
-
         /* --- ESTILOS PARA O EFEITO DE VIRAR O CARD --- */
         .project-card {
             background-color: transparent;
@@ -469,7 +468,6 @@
             visibility: hidden;
         }
         /* --- [FIM DO NOVO EFEITO] --- */
-
 
         .card-content {
             padding: 30px;
@@ -671,17 +669,14 @@
             <div class="container">
                 <h2 class="section-title">Portfólio</h2>
 
-                <!-- [ALTERAÇÃO HTML] Ordem dos filtros alterada -->
                 <div class="portfolio-filters">
                     <button class="filter-btn active" data-primary-filter="all">Todos</button>
                     <button class="filter-btn" data-primary-filter="impacto">IMPACTO</button>
                     <button class="filter-btn" data-primary-filter="fai">FAI</button>
-                    <!-- [NOVO FILTRO] -->
                     <button class="filter-btn" data-primary-filter="camara">Câmara Municipal de Bauru</button>
                     <button class="filter-btn" data-primary-filter="unesp">Unesp</button>
                 </div>
 
-                <!-- [ALTERAÇÃO HTML] Ordem dos grupos de filtros alterada -->
                 <div class="secondary-filters-container">
                     <div data-group="impacto" style="display: none;">
                         <button class="secondary-filter-btn active" data-secondary-filter="all">Todos</button>
@@ -706,19 +701,32 @@
                     </div>
                 </div>
                 
+                <!-- [TEXTOS E LINKS ESPECÍFICOS DE SEÇÕES] -->
                 <div id="tcc-description" class="tcc-intro" style="display: none;">
                     <p>Audiodocumentário "Raio-X: os 10 anos da Rádio Câmara Bauru".</p>  
                     <p>Este projeto conta com 6 episódios que narram um pouco dos bastidores da emissora legislativa bauruense por meio de entrevistas com personagens envolvidos em Comunicação Pública e no dia a dia da rádio.</p>
                 </div>
 
-                <div id="impacto-description" class="tcc-intro" style="display: none;">
+                <div id="impacto-materias-description" class="tcc-intro" style="display: none;">
                     <p>Conferir todos os conteúdos assinados no IMPACTO: <a href="https://www.impactonoticias.com.br/author/gu/" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://www.impactonoticias.com.br/author/gu/</a></p>
+                </div>
+
+                <div id="impacto-reels-description" class="tcc-intro" style="display: none;">
+                    <p>Conferir todos os conteúdos do Instagram do IMPACTO: <a href="https://www.instagram.com/portaldoimpacto/" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://www.instagram.com/portaldoimpacto/</a></p>
+                </div>
+
+                <div id="fai-materias-description" class="tcc-intro" style="display: none;">
+                    <p>Conferir todos os conteúdos do portal da FAI: <a href="https://www.fai.com.br/novo-portal/blog/pagina/1" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://www.fai.com.br/novo-portal/blog/pagina/1</a></p>
+                </div>
+
+                <div id="fai-reels-description" class="tcc-intro" style="display: none;">
+                    <p>Conferir todos os conteúdos do Instagram da FAI: <a href="https://www.instagram.com/faiadamantina/" target="_blank" style="color: var(--primary-color); text-decoration: underline;">https://www.instagram.com/faiadamantina/</a></p>
                 </div>
 
                 <div class="portfolio-grid">
 
                     <!-- ============================================== -->
-                    <!-- NOVOS CARDS IMPACTO                            -->
+                    <!-- CARDS IMPACTO                                  -->
                     <!-- ============================================== -->
 
                     <!-- Card Impacto: Matéria -->
@@ -877,7 +885,7 @@
                             </div>
                             <div class="card-back">
                                 <h3>Comentário</h3>
-                                <p>Essa notícia foi interessante de produzir porque precisei compreender um assunto que não dominava para escrever sobre e divulgar a parceria do Centro Universitário com o NAF.</p>
+                                <p>Essa notícia foi interessante de produzir porque precisei compreender um assunto que não dominava para escrever sobre e divulgar a parceria do centro universitário com o NAF.</p>
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
@@ -898,13 +906,12 @@
                             </div>
                             <div class="card-back">
                                 <h3>Comentário</h3>
-                                <p>Essa matéria obteve uma boa repercussão nos veículos de comunicação da região de Adamantina.</p>
+                                <p>Essa matéria obteve uma boa repercussão que teve nos veículos de comunicação da região de Adamantina.</p>
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- [ALTERAÇÃO HTML] Card de Reel agora tem botão e card-back -->
                     <div class="project-card" data-primary-category="fai" data-secondary-category="reels">
                         <div class="card-inner">
                             <div class="card-front">
@@ -1146,7 +1153,7 @@
                             </div>
                             <div class="card-back">
                                 <h3>Comentário</h3>
-                                <p>Alguns dos diversos textos radiofônicos que fiz para o programete "Palavra do Especialista" da Câmara Municipal de Bauru. Infelizmente não consegui encontrar os conteúdos sonoros para anexar aqui também.</p>
+                                <p>Um dos diversos textos radiofônicos que fiz para os boletins informativos. Infelizmente não encontrei os conteúdos sonoros.</p>
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
@@ -1166,7 +1173,7 @@
                             </div>
                             <div class="card-back">
                                 <h3>Comentário</h3>
-                                <p>Alguns dos diversos textos radiofônicos que fiz para os boletins informativos da Câmara Municipal de Bauru. Infelizmente não consegui encontrar os conteúdos sonoros para anexar aqui também.</p>
+                                <p>Um dos diversos textos radiofônicos que fiz para os boletins informativos. Infelizmente não encontrei os conteúdos sonoros.</p>
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
@@ -1186,7 +1193,7 @@
                             </div>
                             <div class="card-back">
                                 <h3>Comentário</h3>
-                                <p>Alguns dos diversos textos radiofônicos que fiz para a Câmara Municipal de Bauru. Infelizmente não consegui encontrar os conteúdos sonoros para anexar aqui também.</p>
+                                <p>Um dos diversos textos radiofônicos que fiz para os boletins informativos. Infelizmente não encontrei os conteúdos sonoros.</p>
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
@@ -1253,6 +1260,8 @@
                                 <button class="cta-button card-link flip-back-btn">Voltar</button>
                             </div>
                         </div>
+                    </div>
+                
                 </div>
                 </div>
         </section>
@@ -1339,7 +1348,8 @@
         }
 
         // --- [GLOBAL] LÓGICA DO PORTFÓLIO ---
-        let primaryFiltersContainer, secondaryFiltersContainer, projectCards, tccDescription, impactoDescription;
+        let primaryFiltersContainer, secondaryFiltersContainer, projectCards;
+        let tccDescription, impactoMateriasDescription, impactoReelsDescription, faiMateriasDescription, faiReelsDescription;
         let activePrimaryFilter = 'all';
         let activeSecondaryFilter = 'all';
 
@@ -1365,19 +1375,16 @@
             }
         }
 
-        // --- FUNÇÃO filterGrid() ATUALIZADA (SEM ANIMAÇÕES) ---
+        // --- FUNÇÃO filterGrid() ATUALIZADA (SEM ANIMAÇÕES E COM NOVOS TEXTOS) ---
         function filterGrid() {
             if (!tccDescription || !projectCards) return; 
 
-            // Lógica para TCC
-            const showTccDesc = activePrimaryFilter === 'unesp' && activeSecondaryFilter === 'tcc';
-            tccDescription.style.display = showTccDesc ? 'block' : 'none';
-
-            // Lógica para IMPACTO
-            const showImpactoDesc = activePrimaryFilter === 'impacto' && activeSecondaryFilter === 'materias';
-            if (impactoDescription) {
-                 impactoDescription.style.display = showImpactoDesc ? 'block' : 'none';
-            }
+            // Lógica de exibição para os textos descritivos das abas
+            if (tccDescription) tccDescription.style.display = (activePrimaryFilter === 'unesp' && activeSecondaryFilter === 'tcc') ? 'block' : 'none';
+            if (impactoMateriasDescription) impactoMateriasDescription.style.display = (activePrimaryFilter === 'impacto' && activeSecondaryFilter === 'materias') ? 'block' : 'none';
+            if (impactoReelsDescription) impactoReelsDescription.style.display = (activePrimaryFilter === 'impacto' && activeSecondaryFilter === 'reels') ? 'block' : 'none';
+            if (faiMateriasDescription) faiMateriasDescription.style.display = (activePrimaryFilter === 'fai' && activeSecondaryFilter === 'materias') ? 'block' : 'none';
+            if (faiReelsDescription) faiReelsDescription.style.display = (activePrimaryFilter === 'fai' && activeSecondaryFilter === 'reels') ? 'block' : 'none';
             
             const showsReels = (activePrimaryFilter === 'fai' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels')) || activePrimaryFilter === 'all' || (activePrimaryFilter === 'impacto' && (activeSecondaryFilter === 'all' || activeSecondaryFilter === 'reels'));
             
@@ -1468,12 +1475,17 @@
             
             setTimeout(animateHero, 200);
 
-            // --- CONFIGURAÇÃO DO FILTRO DE PORTFÓLIO ---
+            // --- CONFIGURAÇÃO DO FILTRO DE PORTFÓLIO E REFERÊNCIAS ---
             primaryFiltersContainer = document.querySelector('.portfolio-filters');
             secondaryFiltersContainer = document.querySelector('.secondary-filters-container');
             projectCards = document.querySelectorAll('.project-card');
+            
+            // Atrelando os elementos de texto com seus devidos IDs criados no HTML
             tccDescription = document.getElementById('tcc-description');
-            impactoDescription = document.getElementById('impacto-description');
+            impactoMateriasDescription = document.getElementById('impacto-materias-description');
+            impactoReelsDescription = document.getElementById('impacto-reels-description');
+            faiMateriasDescription = document.getElementById('fai-materias-description');
+            faiReelsDescription = document.getElementById('fai-reels-description');
 
             if(primaryFiltersContainer) {
                 primaryFiltersContainer.addEventListener('click', (e) => {
